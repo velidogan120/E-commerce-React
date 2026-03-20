@@ -1,9 +1,10 @@
 import "./App.css";
 import { ToastContainer } from "react-toastify";
+import Header from "./components/shared/Header";
 function App() {
   return (
     <>
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
+      <Header />
       <ToastContainer />
     </>
   );

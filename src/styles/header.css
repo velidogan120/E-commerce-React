@@ -1,0 +1,79 @@
+@reference "../index.css";
+
+.top-info {
+  @apply hidden lg:block bg-slate-800 text-white gap-4;
+}
+
+.top-info-bar {
+  @apply container mx-auto flex items-center justify-between px-6 py-4 font-bold;
+}
+
+.top-info-left {
+  @apply flex items-center gap-6;
+}
+
+.info-item {
+  @apply flex items-center gap-2;
+}
+
+.top-info-center {
+  @apply flex-1 text-center;
+}
+
+.top-info-right {
+  @apply flex items-center gap-3;
+}
+
+.main-header {
+  @apply relative p-3;
+}
+
+.header-container {
+  @apply container mx-auto px-4 lg:px-6 py-4 flex items-center justify-between;
+}
+
+.logo h1 {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+.nav-link {
+  @apply text-neutral-500 font-bold hover:text-slate-800 transition-colors block px-6 py-3;
+}
+
+.icon-button {
+  @apply text-sky-500 transition-colors p-2 rounded-lg hover:bg-gray-100 flex items-center gap-1;
+}
+
+.mobile-menu-toggle {
+  @apply lg:hidden ml-auto text-slate-800 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-gray-100;
+}
+
+.nav-menu {
+  @apply hidden lg:flex lg:items-center lg:justify-between lg:flex-1 lg:ml-8;
+}
+
+.nav-menu.is-open {
+  @apply absolute left-0 right-0 top-full z-50 flex flex-col bg-white border-b border-gray-200 lg:border-0;
+}
+
+.menu-links {
+  @apply flex flex-col items-center;
+}
+
+.menu-icons {
+  @apply flex items-center flex-col gap-3 px-6 py-4;
+}
+
+@media (min-width: 1024px) {
+  .menu-links {
+    @apply flex-row items-center gap-8;
+  }
+
+  .menu-links .nav-link {
+    @apply p-0 border-0 text-sm;
+  }
+
+  .menu-icons {
+    @apply px-0 py-0 flex-row border-0 ml-auto;
+  }
+}
