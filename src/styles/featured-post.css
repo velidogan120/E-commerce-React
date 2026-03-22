@@ -38,10 +38,16 @@
 
 .featured-posts-card-info .featured-posts-card-info-badge div {
   @apply flex gap-2 items-center bg-slate-800 rounded-2xl p-2 text-xs text-white;
+  @variant dark {
+    @apply bg-white text-slate-800;
+  }
 }
 
 .featured-posts-card-info h4 {
   @apply text-slate-800 font-bold text-base;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .featured-posts-card-info .featured-posts-card-info-download {
@@ -49,7 +55,7 @@
 }
 
 .featured-posts-card-info .card-colors {
-  @apply flex gap-2 items-center;
+  @apply flex gap-2 items-center bg-white p-3 rounded-lg w-max;
 }
 
 .featured-posts-card-info-stats {

@@ -8,6 +8,7 @@ import FeaturedProducts from "./components/FeaturedProducts";
 import FeaturedProductsInfo from "./components/FeaturedProductsInfo";
 import BestServices from "./components/BestServices";
 import FeaturedPosts from "./components/FeaturedPosts";
+import Footer from "./components/shared/Footer";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
       <FeaturedProductsInfo />
       <BestServices />
       <FeaturedPosts />
+      <Footer />
       <ToastContainer />
     </>
   );

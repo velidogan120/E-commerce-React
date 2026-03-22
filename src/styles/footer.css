@@ -1,0 +1,79 @@
+@import "../index.css";
+
+.footer-container {
+  @apply container mx-auto lg:px-10 py-12;
+}
+
+.footer {
+  @apply flex flex-col justify-center;
+}
+
+.footer-top {
+  @apply mb-4 bg-zinc-50 px-10;
+}
+
+.footer-top .footer-container {
+  @apply flex flex-col items-start gap-4 lg:flex-row lg:justify-between lg:items-center;
+}
+
+.footer-top .footer-logo {
+  @apply text-2xl font-bold text-slate-800;
+}
+
+.footer-top .footer-brands {
+  @apply flex flex-row gap-4 text-sky-500;
+}
+
+.footer-middle {
+  @apply mb-4 px-10;
+}
+
+.footer-middle.footer-container {
+  @apply flex flex-col gap-10 lg:flex-row lg:justify-between;
+}
+
+.footer-middle h5 {
+  @apply text-slate-800 text-base font-bold mb-5;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.footer-middle .footer-list {
+  @apply flex flex-col gap-3 mb-8;
+}
+
+.footer-middle .footer-list li a {
+  @apply font-bold;
+}
+
+.footer-middle .footer-form {
+  @apply flex flex-row;
+}
+
+.footer-middle form input {
+  @apply rounded-r-none;
+}
+
+.footer-middle form .btn {
+  @apply rounded-l-none;
+}
+
+.footer-middle p {
+  @apply mt-3 text-xs;
+}
+
+.footer-bottom {
+  @apply bg-zinc-50 px-10 font-bold text-center;
+}
+
+.footer-bottom .footer-container {
+  @apply py-8 items-start;
+}
+
+.footer-bottom p {
+  @apply flex flex-col lg:flex-row;
+  @variant dark {
+    @apply text-slate-800;
+  }
+}
