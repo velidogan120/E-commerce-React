@@ -1,0 +1,28 @@
+@reference "../index.css";
+
+.featured-products-info-container {
+  @apply container mx-auto px-4 py-25;
+}
+
+.featured-products-info {
+  @apply flex flex-col-reverse lg:flex-row items-center gap-8;
+}
+
+.featured-products-info-images {
+  @apply flex gap-16 overflow-hidden lg:gap-18;
+}
+
+.featured-products-info-images img {
+  @apply object-cover h-100;
+}
+
+.featured-products-info-images img:first-child {
+  @apply w-[40%] scale-[1.2] lg:scale-100;
+}
+
+.featured-products-info-images img:last-child {
+  @apply w-[60%] scale-[1.2] lg:scale-120 object-[-200px_0px] lg:object-[-55px_0px];
+}
+.featured-products-info-text {
+  @apply px-30 py-10 flex flex-col gap-8 lg:px-10;
+}

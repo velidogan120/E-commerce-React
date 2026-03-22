@@ -1,0 +1,5 @@
+@import "../index.css";
+
+.brands {
+  @apply container mx-auto flex flex-col items-center p-30 gap-15 lg:flex-row lg:justify-center lg:gap-30;
+}

@@ -1,0 +1,13 @@
+@import "../index.css";
+
+.featured-posts-container {
+  @apply container mx-auto px-4 py-8;
+}
+
+.featured-posts .common-title {
+  @apply text-center;
+}
+
+.featured-posts-list {
+  @apply my-30 flex flex-col lg:flex-row gap-10;
+}

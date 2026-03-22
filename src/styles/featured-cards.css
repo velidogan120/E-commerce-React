@@ -1,0 +1,53 @@
+@import "../index.css";
+
+.featured-cards-container {
+  @apply container mx-auto px-4 py-8 my-10;
+}
+
+.featured-cards {
+  @apply flex gap-4 flex-col lg:flex-row;
+}
+
+.featured-cards-left {
+  @apply basis-full overflow-hidden h-150 lg:h-155 relative;
+}
+
+.featured-cards-right {
+  @apply basis-full flex flex-col gap-4 lg:gap-5;
+}
+
+.featured-cards-right .featured-card {
+  @apply h-110 overflow-hidden lg:h-75;
+}
+
+.featured-card {
+  @apply relative h-full;
+}
+
+.featured-card img {
+  @apply lg:w-full;
+}
+
+.featured-cards-right img {
+  @apply lg:w-full lg:relative lg:bottom-60;
+}
+
+.featured-cards-left img {
+  @apply h-full object-cover;
+}
+
+.featured-cards-right .featured-card-content {
+  @apply lg:p-10;
+}
+
+.featured-card-content {
+  @apply absolute left-0 bottom-0 px-10 py-15 text-white bg-cyan-600/75 w-full lg:w-110;
+}
+
+.featured-card-content h3 {
+  @apply text-2xl font-bold mb-6;
+}
+
+.featured-card-button.btn {
+  @apply bg-transparent border border-white hover:bg-white hover:text-cyan-600;
+}

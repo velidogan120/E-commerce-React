@@ -1,7 +1,9 @@
 @reference "../index.css";
-
 .top-info {
   @apply hidden lg:block bg-slate-800 text-white gap-4;
+  @variant dark {
+    @apply bg-white text-slate-800;
+  }
 }
 
 .top-info-bar {
@@ -34,10 +36,16 @@
 
 .logo h1 {
   @apply text-2xl font-bold text-gray-900;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .nav-link {
   @apply text-neutral-500 font-bold hover:text-slate-800 transition-colors block px-6 py-3;
+  @variant dark {
+    @apply text-neutral-400 hover:text-gray-300;
+  }
 }
 
 .icon-button {

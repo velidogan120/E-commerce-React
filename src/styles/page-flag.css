@@ -1,0 +1,57 @@
+@reference "../index.css";
+
+.flag {
+  @apply container mx-auto;
+}
+
+.flag-container {
+  @apply flex w-19/20 mx-auto mt-10 rounded-3xl bg-gradient-to-r from-cyan-200 to-emerald-200 flex-wrap lg:flex-nowrap;
+}
+
+.flag-content {
+  @apply flex items-center lg:items-start flex-col gap-10 justify-center p-20 lg:py-40 lg:ps-30 lg:pe-0 lg:flex-1 text-center md:text-left;
+}
+
+.flag-content .flag-badge {
+  @apply text-base font-bold text-sky-600 uppercase;
+}
+
+.flag-content .flag-header {
+  @apply text-4xl lg:text-6xl font-bold text-slate-800 lg:whitespace-nowrap;
+}
+
+.flag-content .flag-text {
+  @apply text-xl text-neutral-500;
+}
+
+.flag-content .flag-button {
+  @apply px-12 py-4 text-white uppercase bg-sky-500 text-2xl font-bold;
+}
+
+.flag-image {
+  @apply lg:flex-1 relative lg:py-20 lg:mt-0 mt-20;
+}
+
+.flag-image .small-circle-1 {
+  @apply absolute rounded-full size-3 lg:size-3/100 top-50 right-100 lg:top-100 lg:right-116 bg-violet-400 z-100;
+}
+
+.flag-image .small-circle-2 {
+  @apply absolute rounded-full size-3 lg:size-3/100 top-7 right-15 lg:top-20 lg:right-[-100px] bg-violet-400 z-10;
+}
+
+.flag-image .medium-circle {
+  @apply absolute rounded-full bg-white size-5 lg:size-1/20 left-105 top-30 lg:top-60 lg:left-180 z-100;
+}
+
+.flag-image .large-circle {
+  @apply absolute rounded-full bg-white size-10 lg:size-3/20 lg:top-[-10px] lg:right-150;
+}
+
+.flag-image .big-circle {
+  @apply absolute rounded-full bg-white size-80 lg:size-7/10 top-[-40px] lg:top-[-10px] right-20 lg:right-[-10px];
+}
+
+.flag-image img {
+  @apply object-cover lg:absolute z-10 relative bottom-0 w-full lg:h-9/10 lg:right-[-100px] overflow-visible;
+}

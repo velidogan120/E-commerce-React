@@ -12,11 +12,15 @@ import {
   Youtube,
   Heart,
   User,
+  Moon,
+  Sun,
 } from "lucide-react";
 import "../../../src/styles/header.css";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { handleToggleTheme, theme } = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -116,6 +120,11 @@ export default function Header() {
               <button className="icon-button" aria-label="Search">
                 <Heart size={20} /> 1
               </button>
+              {
+                <button className="icon-button" onClick={handleToggleTheme}>
+                  {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+                </button>
+              }
             </div>
           </div>
         </div>

@@ -1,0 +1,65 @@
+@import "../index.css";
+
+.featured-posts-card {
+  @apply flex flex-col lg:flex-row p-5;
+}
+
+.featured-posts-card-image {
+  @apply relative;
+}
+
+.featured-posts-card-badge {
+  @apply absolute top-3 left-3 bg-red-500 text-white px-3 py-1 font-bold z-40;
+}
+
+.featured-posts-card-image img {
+  @apply w-full object-bottom lg:w-85 h-96 lg:h-full object-cover;
+}
+
+.featured-posts-card-image .featured-posts-card-icons {
+  @apply hidden lg:flex absolute bottom-10 left-10 z-40 gap-3;
+}
+
+.featured-posts-card-image .featured-posts-card-icons div {
+  @apply w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-700 cursor-pointer;
+}
+
+.featured-posts-card-info {
+  @apply px-5 pt-8 lg:p-10 flex flex-col gap-5;
+}
+
+.featured-posts-card-info .featured-posts-card-info-badge {
+  @apply flex justify-between items-center mb-2;
+}
+
+.featured-posts-card-info .featured-posts-card-info-badge h5 {
+  @apply text-sky-500 font-bold;
+}
+
+.featured-posts-card-info .featured-posts-card-info-badge div {
+  @apply flex gap-2 items-center bg-slate-800 rounded-2xl p-2 text-xs text-white;
+}
+
+.featured-posts-card-info h4 {
+  @apply text-slate-800 font-bold text-base;
+}
+
+.featured-posts-card-info .featured-posts-card-info-download {
+  @apply flex gap-2 items-center font-bold;
+}
+
+.featured-posts-card-info .card-colors {
+  @apply flex gap-2 items-center;
+}
+
+.featured-posts-card-info-stats {
+  @apply text-xs flex flex-row gap-5;
+}
+
+.featured-posts-card-info-stats div {
+  @apply flex items-center gap-2;
+}
+
+.featured-posts-card-info-btn.btn {
+  @apply flex bg-white rounded-full lg:border lg:border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition-colors duration-300 px-4 py-2 lg:mt-5 w-fit;
+}

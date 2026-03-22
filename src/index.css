@@ -8,4 +8,48 @@
 
 body {
   @apply bg-white text-neutral-500 font-normal font-montserrat text-sm;
+  @variant dark {
+    @apply bg-slate-800 text-white;
+  }
+}
+
+.btn {
+  @apply inline-block rounded-lg px-6 py-3 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 transition-colors duration-300;
+}
+
+.common-header {
+  @apply flex flex-col;
+}
+
+.common-header h2 {
+  @apply text-2xl text-slate-800 font-bold mt-4 mb-2;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.common-header h4 {
+  @apply text-xl;
+}
+.common-title h4 {
+  @apply text-sky-500 text-base font-bold;
+}
+
+.common-title h3 {
+  @apply text-slate-800 text-4xl font-bold pt-5;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.price {
+  @apply text-base font-bold flex gap-2;
+}
+
+.price .price-old {
+  @apply text-stone-300;
+}
+
+.price .price-new {
+  @apply text-teal-700;
 }
