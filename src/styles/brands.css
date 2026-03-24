@@ -1,5 +1,13 @@
 @import "../index.css";
 
-.brands {
-  @apply container mx-auto flex flex-col items-center p-30 gap-15 lg:flex-row lg:justify-center lg:gap-30;
+.brands-container {
+  @apply container mx-auto gap-15 flex flex-col items-center lg:flex-row lg:justify-center lg:gap-30;
+}
+
+.brands.home {
+  @apply p-30;
+}
+
+.brands.other {
+  @apply px-15 py-30 lg:py-15 bg-zinc-50;
 }

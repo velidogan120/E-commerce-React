@@ -1,9 +1,13 @@
 import { Facebook, Instagram, Twitter } from "lucide-react";
 import "../../styles/footer.css";
+import { useLocation } from "react-router";
 const Footer = () => {
+  const location = useLocation();
   return (
     <div className="footer">
-      <div className="footer-top">
+      <div
+        className={`footer-top ${location.pathname === "/" ? "home" : "other"}`}
+      >
         <div className="footer-container">
           <span className="footer-logo">Bandage</span>
           <div className="footer-brands">

@@ -1,0 +1,31 @@
+@import "../index.css";
+
+.sort {
+  @apply container mx-auto flex flex-col items-center lg:flex-row justify-between gap-8 my-8 font-bold;
+}
+
+.sort div {
+  @apply flex items-center gap-2;
+}
+
+.sort div:nth-child(2) button {
+  @apply p-3 border border-gray-200 rounded-md;
+}
+
+.sort .icon-grid {
+  @apply text-black;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.sort .sort-select {
+  @apply w-max;
+  @variant dark {
+    @apply text-slate-800;
+  }
+}
+
+.sort .sort-filter-btn {
+  @apply py-5 px-8 bg-sky-500 font-bold;
+}

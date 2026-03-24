@@ -1,0 +1,22 @@
+@import "../index.css";
+
+.shop-categories-card {
+  @apply relative lg:w-1/5 w-80 h-80 lg:h-52 overflow-hidden cursor-pointer text-white;
+}
+
+.shop-categories-card h5 {
+  @apply font-bold text-base;
+}
+
+.shop-categories-card img {
+  @apply w-full h-full object-cover;
+}
+
+.shop-categories-card::before {
+  @apply absolute w-full h-full top-0 left-0 bg-black opacity-50 z-5;
+  content: "";
+}
+
+.shop-categories-card div {
+  @apply absolute flex flex-col w-full h-full top-0 items-center justify-center z-10;
+}

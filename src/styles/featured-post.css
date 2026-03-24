@@ -54,10 +54,6 @@
   @apply flex gap-2 items-center font-bold;
 }
 
-.featured-posts-card-info .card-colors {
-  @apply flex gap-2 items-center bg-white p-3 rounded-lg w-max;
-}
-
 .featured-posts-card-info-stats {
   @apply text-xs flex flex-row gap-5;
 }

@@ -54,6 +54,11 @@ body {
   @apply text-teal-700;
 }
 
-input {
+input,
+select {
   @apply w-full py-5 px-5 rounded-md bg-zinc-50 placeholder:font-bold border placeholder:text-gray-500 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+.card-colors {
+  @apply flex gap-2 items-center bg-white p-3 rounded-lg w-max;
 }

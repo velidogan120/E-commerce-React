@@ -9,7 +9,15 @@
 }
 
 .footer-top {
-  @apply mb-4 bg-zinc-50 px-10;
+  @apply mb-4 px-10;
+}
+
+.footer-top.home {
+  @apply bg-zinc-50;
+}
+
+.footer-top.other {
+  @apply bg-transparent;
 }
 
 .footer-top .footer-container {
@@ -17,7 +25,18 @@
 }
 
 .footer-top .footer-logo {
-  @apply text-2xl font-bold text-slate-800;
+  @apply text-2xl font-bold;
+}
+
+.footer-top.home .footer-logo {
+  @apply text-slate-800;
+}
+
+.footer-top.other .footer-logo {
+  @apply text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .footer-top .footer-brands {

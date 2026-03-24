@@ -1,0 +1,25 @@
+@import "../index.css";
+
+.breadcrumb {
+  @apply bg-zinc-50;
+}
+
+.breadcrumb-container {
+  @apply container mx-auto flex flex-col lg:flex-row gap-10 items-center justify-between p-10;
+}
+
+.breadcrumb-container h2 {
+  @apply text-slate-800 text-2xl font-bold;
+}
+
+.breadcrumb-info {
+  @apply flex items-center gap-2 font-bold;
+}
+
+.breadcrumb-info a {
+  @apply text-slate-800;
+}
+
+.breadcrumb-info a:last-child {
+  @apply text-stone-300;
+}

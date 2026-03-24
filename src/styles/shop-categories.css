@@ -1,0 +1,9 @@
+@import "../index.css";
+
+.shop-categories {
+  @apply bg-zinc-50;
+}
+
+.shop-categories-container {
+  @apply container mx-auto flex flex-col lg:flex-row gap-10 items-center py-10;
+}
