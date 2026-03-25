@@ -8,7 +8,7 @@ const Brands = () => {
       <div className="brands-container">
         {Array.from({ length: 6 }).map((_, index) => (
           <img
-            src={`./brands/fa-brands-${index + 1}.png`}
+            src={`/brands/fa-brands-${index + 1}.png`}
             key={index}
             className="brand"
           />

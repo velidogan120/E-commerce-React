@@ -4,6 +4,18 @@
   @apply flex flex-col items-center gap-4 w-full lg:w-1/5 lg:p-4;
 }
 
+.featured-product a {
+  @apply flex flex-col items-center gap-4 no-underline text-inherit;
+}
+
+.featured-product a.product {
+  @apply items-start;
+}
+
+.featured-product a.product .product-padding {
+  @apply flex flex-col items-start gap-4 p-5;
+}
+
 .featured-product img {
   @apply w-full;
 }

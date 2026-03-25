@@ -1,0 +1,147 @@
+@reference "../index.css";
+
+.product-detail-section {
+  @apply bg-zinc-100 py-12 lg:py-14;
+}
+
+.product-detail-container {
+  @apply container mx-auto grid grid-cols-1 gap-10 px-4 lg:grid-cols-[1.25fr_1fr] lg:gap-16;
+}
+
+.product-gallery {
+  @apply w-full;
+}
+
+.product-gallery-main {
+  @apply relative overflow-hidden bg-white;
+}
+
+.product-gallery-main-image {
+  @apply h-110 w-full object-cover lg:h-135;
+}
+
+.product-gallery-nav {
+  @apply absolute top-1/2 z-10 -translate-y-1/2 text-white transition-opacity duration-200 hover:opacity-80;
+}
+
+.product-gallery-nav-left {
+  @apply left-5;
+}
+
+.product-gallery-nav-right {
+  @apply right-5;
+}
+
+.product-gallery-thumbs {
+  @apply mt-6 flex gap-5;
+}
+
+.product-thumb {
+  @apply h-20 w-20 overflow-hidden border-2 border-transparent transition-all duration-200 lg:h-24 lg:w-24;
+}
+
+.product-thumb img {
+  @apply h-full w-full object-cover;
+}
+
+.product-thumb.is-active {
+  @apply border-sky-500;
+}
+
+.product-detail-info {
+  @apply flex flex-col gap-5 pr-0 lg:pr-8;
+}
+
+.product-detail-info h1 {
+  @apply text-xl text-slate-800;
+}
+
+.product-rating-row {
+  @apply flex items-center gap-3;
+}
+
+.product-stars {
+  @apply flex items-center gap-1 text-yellow-400;
+}
+
+.product-stars .is-filled {
+  @apply text-yellow-400;
+}
+
+.product-rating-row p {
+  @apply font-bold;
+}
+
+.product-price {
+  @apply text-4xl font-bold text-slate-800;
+}
+
+.product-stock {
+  @apply font-bold;
+}
+
+.product-stock span {
+  @apply text-sky-500;
+}
+
+.product-detail-description {
+  @apply max-w-120;
+}
+
+.product-divider {
+  @apply mt-1 w-full border-zinc-300;
+}
+
+.product-colors {
+  @apply flex items-center gap-4;
+}
+
+.color-dot {
+  @apply h-8 w-8 rounded-full;
+}
+
+.color-dot-blue {
+  @apply bg-sky-500;
+}
+
+.color-dot-green {
+  @apply bg-emerald-500;
+}
+
+.color-dot-orange {
+  @apply bg-orange-500;
+}
+
+.color-dot-navy {
+  @apply bg-slate-900;
+}
+
+.product-actions {
+  @apply mt-7 flex flex-wrap items-center gap-3;
+}
+
+.product-select-btn {
+  @apply rounded-md bg-sky-500 px-8 py-4 text-lg font-bold text-white transition-colors duration-200 hover:bg-sky-600;
+}
+
+.product-icon-btn {
+  @apply flex h-12 w-12 items-center justify-center rounded-full border border-zinc-300 bg-white text-slate-700 transition-colors duration-200 hover:bg-zinc-100;
+}
+
+@media (max-width: 1023px) {
+  .product-detail-info h1 {
+    @apply text-3xl;
+  }
+
+  .product-price {
+    @apply text-3xl;
+  }
+
+  .product-stock {
+    @apply text-xl;
+  }
+
+  .product-detail-description {
+    @apply max-w-none text-base leading-7;
+  }
+}

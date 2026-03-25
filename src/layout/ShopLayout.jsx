@@ -1,11 +1,15 @@
 import { Outlet } from "react-router";
 import Breadcrumb from "../components/shared/Breadcrumb";
+import Brands from "../components/Brands";
 
 const ShopLayout = () => {
   return (
     <>
       <Breadcrumb />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
+      <Brands />
     </>
   );
 };

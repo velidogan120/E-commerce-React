@@ -11,7 +11,6 @@ const ShopPage = () => {
       <Sort />
       <FilteredProducts />
       <Pagination />
-      <Brands />
     </>
   );
 };
