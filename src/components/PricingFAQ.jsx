@@ -1,5 +1,5 @@
 import "../styles/pricing-faq.css";
-import PricingFAQCard from "./PricingFaqCard";
+import PricingFAQCard from "./PricingFAQCard";
 const PricingFAQ = () => {
   return (
     <div className="pricing-faq">
