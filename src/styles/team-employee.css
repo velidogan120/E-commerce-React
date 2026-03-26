@@ -9,5 +9,5 @@
 }
 
 .team-container .employees {
-  @apply flex gap-10 items-center lg:px-30 flex-col lg:flex-row;
+  @apply flex gap-10 items-center lg:px-30 flex-col lg:flex-row flex-wrap;
 }

@@ -1,6 +1,8 @@
+import { useLocation } from "react-router";
 import "../styles/team-employee.css";
 import Employee from "./Employee";
 const TeamEmployee = () => {
+  const location = useLocation();
   return (
     <div className="team-container">
       <div className="team-header">
@@ -16,6 +18,12 @@ const TeamEmployee = () => {
         {Array.from({ length: 3 }).map((_, index) => (
           <Employee key={index} index={index} />
         ))}
+        {location.pathname === "/team" &&
+          Array.from({ length: 2 }).map(() =>
+            Array.from({ length: 3 }).map((_, index) => (
+              <Employee key={index} index={index} />
+            )),
+          )}
       </div>
     </div>
   );
