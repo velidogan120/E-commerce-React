@@ -1,0 +1,21 @@
+@reference "../tailwind-ref.css";
+
+.showcase {
+  @apply flex flex-col lg:flex-row gap-1;
+}
+
+.showcase .showcase-left {
+  @apply w-full lg:flex-1 h-full;
+}
+
+.showcase .showcase-left img {
+  @apply w-full h-[764px] object-cover;
+}
+
+.showcase .showcase-right {
+  @apply flex flex-row flex-wrap justify-between gap-1 w-full lg:flex-1;
+}
+
+.showcase .showcase-right img {
+  @apply w-[49%] h-[170px] object-cover lg:h-95;
+}
