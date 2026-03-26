@@ -1,0 +1,20 @@
+@reference "../tailwind-ref.css";
+
+.trial {
+  @apply container mx-auto flex flex-col gap-10 items-center p-40 text-center;
+}
+
+.trial h3 {
+  @apply font-bold text-4xl text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.trial p {
+  @apply w-100;
+}
+
+.trial .trial-icons {
+  @apply flex gap-5;
+}

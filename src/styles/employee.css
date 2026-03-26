@@ -1,0 +1,21 @@
+@reference "../tailwind-ref.css";
+
+.employee {
+  @apply w-8/10 lg:w-1/3;
+}
+
+.employee .employee-content {
+  @apply flex flex-col items-center gap-4 text-center p-15 pt-10;
+}
+
+.employee .employee-content h4 {
+  @apply text-base font-bold text-slate-800;
+}
+
+.employee .employee-content p {
+  @apply font-bold;
+}
+
+.employee .employee-content .employee-social-icons {
+  @apply flex gap-4 text-sky-500;
+}

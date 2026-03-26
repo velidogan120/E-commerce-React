@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .filtered-products {
   @apply container mx-auto flex flex-col lg:flex-row lg:flex-wrap gap-15 px-10 lg:p-0 lg:gap-0 mt-25;

@@ -1,0 +1,33 @@
+@reference "../tailwind-ref.css";
+
+.pricing-cards {
+  @apply bg-zinc-50 p-10;
+}
+
+.pricing-cards-container {
+  @apply container mx-auto flex flex-col gap-10;
+}
+
+.pricing-cards-container .common-title {
+  @apply flex flex-col gap-7 items-center w-110 mx-auto text-center;
+}
+
+.pricing-cards-container .pricing-cards-time {
+  @apply text-base font-bold flex gap-5 items-center;
+}
+
+.pricing-cards-container .pricing-cards-time .switch-icon {
+  @apply w-15 h-8 bg-white p-1 rounded-full cursor-pointer border border-sky-500;
+}
+
+.pricing-cards-container .pricing-cards-time .switch-icon .switch-icon-circle {
+  @apply w-6 h-6 bg-zinc-300 rounded-full;
+}
+
+.pricing-cards-container .pricing-cards-time .pricing-discount {
+  @apply bg-sky-200 text-sky-500 font-bold rounded-full px-5 py-3;
+}
+
+.pricing-cards-container .cards-container {
+  @apply flex flex-col lg:flex-row gap-10 justify-center items-center lg:items-end;
+}

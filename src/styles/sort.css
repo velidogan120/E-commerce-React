@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .sort {
   @apply container mx-auto flex flex-col items-center lg:flex-row justify-between gap-8 my-8 font-bold;

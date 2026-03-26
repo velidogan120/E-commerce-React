@@ -1,4 +1,4 @@
-@reference "../index.css";
+@reference "../tailwind-ref.css";
 
 .product-description {
   @apply py-16 lg:p-10;

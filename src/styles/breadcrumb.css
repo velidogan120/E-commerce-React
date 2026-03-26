@@ -1,11 +1,30 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .breadcrumb {
   @apply bg-zinc-50;
 }
 
+.breadcrumb.other {
+  @apply bg-transparent;
+}
+
 .breadcrumb-container {
   @apply container mx-auto flex flex-col lg:flex-row gap-10 items-center justify-between p-10;
+}
+
+.breadcrumb.other .breadcrumb-container {
+  @apply flex-col gap-5;
+}
+
+.breadcrumb.other .breadcrumb-container h2 {
+  @apply text-4xl lg:text-6xl;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.breadcrumb.other .breadcrumb-container .breadcrumb-info-text {
+  @apply text-base font-bold;
 }
 
 .breadcrumb-container h2 {
@@ -18,6 +37,9 @@
 
 .breadcrumb-info a {
   @apply text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .breadcrumb-info a:last-child {

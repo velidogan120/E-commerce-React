@@ -1,0 +1,33 @@
+@reference "../tailwind-ref.css";
+
+.business-partner {
+  @apply bg-sky-600;
+}
+
+.business-partner-container {
+  @apply flex justify-center container mx-auto;
+}
+
+.business-partner-container .business-partner-content {
+  @apply p-20 text-white flex flex-col items-center gap-10 text-center lg:items-start lg:text-start;
+}
+
+.business-partner-container > div {
+  @apply flex-1;
+}
+
+.business-partner-container .business-partner-content .business-partner-badge {
+  @apply text-base font-bold;
+}
+
+.business-partner-container .business-partner-content .business-partner-header {
+  @apply text-4xl font-bold;
+}
+
+.business-partner-container .business-partner-content .business-partner-button {
+  @apply px-12 py-4 bg-transparent border border-white hover:bg-white hover:text-sky-500 font-bold;
+}
+
+.business-partner-image {
+  @apply hidden lg:flex lg:justify-center;
+}

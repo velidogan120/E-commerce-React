@@ -1,0 +1,13 @@
+@reference "../tailwind-ref.css";
+
+.about-brands {
+  @apply bg-zinc-50;
+}
+
+.about-brands-container {
+  @apply container mx-auto gap-15 text-center flex flex-col items-center lg:justify-center  p-8;
+}
+
+.about-brands-container .common-title {
+  @apply flex flex-col gap-5;
+}

@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .shop-categories {
   @apply bg-zinc-50;

@@ -1,4 +1,4 @@
-@reference "../index.css";
+@reference "../tailwind-ref.css";
 
 .product-detail-section {
   @apply bg-zinc-100 py-12 lg:py-14;

@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .pagination {
   @apply container mx-auto flex justify-center my-20;

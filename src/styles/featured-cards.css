@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .featured-cards-container {
   @apply container mx-auto px-4 py-8 my-10;

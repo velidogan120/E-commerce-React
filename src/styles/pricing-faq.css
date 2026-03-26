@@ -1,0 +1,21 @@
+@reference "../tailwind-ref.css";
+
+.pricing-faq {
+  @apply container mx-auto flex flex-col gap-10 items-center py-10;
+}
+
+.pricing-faq .common-title {
+  @apply text-center flex flex-col gap-7;
+}
+
+.pricing-faq .common-title p {
+  @apply text-xl w-100 lg:w-120;
+}
+
+.pricing-faq .pricing-faq-cards {
+  @apply flex flex-col lg:flex-row lg:flex-wrap lg:px-40 p-10 gap-15 justify-center;
+}
+
+.pricing-faq .pricing-faq-description {
+  @apply text-xl;
+}

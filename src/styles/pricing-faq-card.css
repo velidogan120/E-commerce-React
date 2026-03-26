@@ -1,0 +1,13 @@
+@reference "../tailwind-ref.css";
+
+.pricing-faq-card {
+  @apply flex items-start gap-5 w-full lg:w-4/10;
+}
+
+.pricing-faq-card .pricing-faq-card-icon {
+  @apply text-sky-500;
+}
+
+.pricing-faq-card .pricing-faq-card-content {
+  @apply flex flex-col gap-3;
+}

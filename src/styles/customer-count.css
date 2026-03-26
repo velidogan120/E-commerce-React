@@ -1,0 +1,17 @@
+@reference "../tailwind-ref.css";
+
+.customer-count {
+  @apply container mx-auto flex flex-col lg:flex-row items-center justify-center gap-30 py-20;
+}
+
+.customer-count .count-item {
+  @apply flex flex-col items-center gap-2;
+}
+
+.customer-count .count-item h3 {
+  @apply text-6xl font-bold text-slate-800;
+}
+
+.customer-count .count-item p {
+  @apply text-base font-bold;
+}

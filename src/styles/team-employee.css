@@ -1,0 +1,13 @@
+@reference "../tailwind-ref.css";
+
+.team-container {
+  @apply container mx-auto text-center flex flex-col gap-20;
+}
+
+.team-container .common-title {
+  @apply flex flex-col gap-5;
+}
+
+.team-container .employees {
+  @apply flex gap-10 items-center lg:px-30 flex-col lg:flex-row;
+}

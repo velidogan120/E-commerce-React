@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .best-services-container {
   @apply container mx-auto px-4 py-1 text-center;

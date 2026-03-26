@@ -1,4 +1,4 @@
-@reference "../index.css";
+@reference "../tailwind-ref.css";
 
 .featured-product {
   @apply flex flex-col items-center gap-4 w-full lg:w-1/5 lg:p-4;

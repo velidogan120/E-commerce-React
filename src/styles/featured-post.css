@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .featured-posts-card {
   @apply flex flex-col lg:flex-row p-5;

@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .footer-container {
   @apply container mx-auto lg:px-10 py-12;

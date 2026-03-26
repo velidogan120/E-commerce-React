@@ -1,4 +1,4 @@
-@reference "../index.css";
+@reference "../tailwind-ref.css";
 .top-info {
   @apply hidden lg:block bg-slate-800 text-white gap-4;
   @variant dark {

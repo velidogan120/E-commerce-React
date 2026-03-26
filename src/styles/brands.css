@@ -1,4 +1,4 @@
-@import "../index.css";
+@reference "../tailwind-ref.css";
 
 .brands-container {
   @apply container mx-auto gap-15 flex flex-col items-center lg:flex-row lg:justify-center lg:gap-30;

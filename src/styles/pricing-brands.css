@@ -1,0 +1,13 @@
+@reference "../tailwind-ref.css";
+
+.pricing-brands {
+  @apply bg-zinc-50 p-10;
+}
+
+.pricing-brands-container {
+  @apply container mx-auto flex flex-col items-center;
+}
+
+.pricing-brands-container .pricing-brands-title {
+  @apply font-bold text-xl text-slate-800;
+}
