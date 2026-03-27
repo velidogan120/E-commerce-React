@@ -70,6 +70,9 @@
 
 .product-rating-row p {
   @apply font-bold;
+  @variant dark {
+    @apply text-slate-600;
+  }
 }
 
 .product-price {
@@ -78,6 +81,9 @@
 
 .product-stock {
   @apply font-bold;
+  @variant dark {
+    @apply text-slate-600;
+  }
 }
 
 .product-stock span {
@@ -86,6 +92,9 @@
 
 .product-detail-description {
   @apply max-w-120;
+  @variant dark {
+    @apply text-slate-600;
+  }
 }
 
 .product-divider {

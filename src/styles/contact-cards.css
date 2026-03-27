@@ -1,0 +1,20 @@
+@reference "../tailwind-ref.css";
+
+.contact-cards {
+  @apply flex flex-col gap-4 items-center text-center mt-15;
+}
+
+.contact-cards .contact-cards-header {
+  @apply font-bold text-slate-800 flex flex-col items-center gap-2 my-10 w-75 lg:w-130;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.contact-cards .contact-cards-header h3 {
+  @apply text-4xl;
+}
+
+.contact-cards .contact-cards-container {
+  @apply flex flex-col lg:flex-row gap-10;
+}

@@ -14,6 +14,9 @@
 
 .about-description .about-left p {
   @apply text-slate-800 text-2xl font-bold;
+  @variant dark {
+    @apply text-slate-300;
+  }
 }
 
 .about-description .about-right {

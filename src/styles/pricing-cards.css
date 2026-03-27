@@ -31,3 +31,10 @@
 .pricing-cards-container .cards-container {
   @apply flex flex-col lg:flex-row gap-10 justify-center items-center lg:items-end;
 }
+
+.pricing-cards,
+.pricing-cards .common-title h3 {
+  @variant dark {
+    @apply text-slate-800;
+  }
+}

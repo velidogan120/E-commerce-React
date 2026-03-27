@@ -7,6 +7,7 @@ import ProductPage from "../../pages/ProductPage";
 import AboutPage from "../../pages/AboutPage";
 import PricePage from "../../pages/PricePage";
 import TeamPage from "../../pages/TeamPage";
+import ContactPage from "../../pages/ContactPage";
 const Router = () => {
   return (
     <Routes>
@@ -19,6 +20,7 @@ const Router = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/price" element={<PricePage />} />
         <Route path="/team" element={<TeamPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Route>
     </Routes>
   );

@@ -8,6 +8,10 @@
   @apply container mx-auto gap-15 text-center flex flex-col items-center lg:justify-center  p-8;
 }
 
-.about-brands-container .common-title {
+.about-brands-container .common-title,
+.about-brands-container .common-title h3 {
   @apply flex flex-col gap-5;
+  @variant dark {
+    @apply text-slate-800;
+  }
 }

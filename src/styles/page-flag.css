@@ -5,11 +5,11 @@
 }
 
 .flag-container {
-  @apply flex w-19/20 mx-auto mt-10 rounded-3xl bg-gradient-to-r from-cyan-200 to-emerald-200 flex-wrap lg:flex-nowrap;
+  @apply flex w-19/20 mx-auto mt-10 rounded-3xl bg-linear-to-r from-cyan-200 to-emerald-200 flex-wrap lg:flex-nowrap;
 }
 
 .flag.other .flag-container {
-  @apply bg-gradient-to-r from-transparent to-transparent;
+  @apply bg-linear-to-r from-transparent to-transparent;
 }
 .flag-content {
   @apply flex items-center lg:items-start flex-col gap-10 justify-center p-20 lg:py-40 lg:ps-30 lg:pe-0 lg:flex-1 text-center md:text-left;
@@ -23,8 +23,18 @@
   @apply text-base font-bold text-sky-600 uppercase;
 }
 
+.flag.other .flag-content .flag-badge {
+  @apply text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
 .flag-content .flag-header {
   @apply text-4xl lg:text-6xl font-bold text-slate-800 lg:whitespace-nowrap;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .flag-content .flag-text {
@@ -40,7 +50,7 @@
 }
 
 .flag-image {
-  @apply lg:flex-1 relative lg:py-20 lg:mt-0 mt-20 overflow-x-hidden;
+  @apply lg:flex-1 relative lg:py-20 lg:mt-0 mt-20;
 }
 
 .flag-image .small-circle-1 {
@@ -68,11 +78,22 @@
 }
 
 .flag.other .flag-image img {
-  @apply top-[-50px] scale-120 lg:bottom-0 lg:scale-100 lg:h-11/10;
+  @apply lg:top-[-50px] scale-120 lg:bottom-0 lg:scale-100 lg:h-11/10;
 }
 
 .flag.other .flag-image .large-circle,
 .flag.other .flag-image .big-circle,
 .flag.other .flag-image .medium-circle {
   @apply bg-rose-100;
+}
+
+.flag .contact-info {
+  @apply text-2xl text-slate-800 font-bold flex flex-col gap-5 items-center lg:items-start;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.flag .contact-icons {
+  @apply flex gap-5 mt-5;
 }

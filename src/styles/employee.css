@@ -10,6 +10,9 @@
 
 .employee .employee-content h4 {
   @apply text-base font-bold text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .employee .employee-content p {

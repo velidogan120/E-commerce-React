@@ -1,0 +1,27 @@
+@reference "../tailwind-ref.css";
+
+.contact-card {
+  @apply flex flex-col gap-4 items-center p-20 font-bold text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.contact-card.contact-card-active {
+  @apply bg-slate-800 text-white;
+  @variant dark {
+    @apply bg-white text-slate-800;
+  }
+}
+
+.contact-card .contact-card-icon {
+  @apply text-sky-500 my-6;
+}
+
+.contact-card .contact-card-description {
+  @apply my-5;
+}
+
+.contact-card .contact-card-button {
+  @apply bg-transparent px-10 py-4 rounded-full text-sky-500 border border-sky-500;
+}

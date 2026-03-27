@@ -54,6 +54,9 @@
 
 .mobile-menu-toggle {
   @apply lg:hidden ml-auto text-slate-800 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-gray-100;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .nav-menu {

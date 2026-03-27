@@ -1,0 +1,23 @@
+@reference "../tailwind-ref.css";
+
+.contact-trial {
+  @apply container mx-auto flex flex-col gap-7 items-center pt-15 pb-40 text-center;
+}
+
+.contact-trial h3 {
+  @apply font-bold text-6xl text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.contact-trial h4 {
+  @apply text-base font-bold text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
+}
+
+.contact-trial .contact-trial-btn {
+  @apply px-12 bg-sky-500 font-bold py-5;
+}

@@ -10,6 +10,9 @@
 
 .customer-count .count-item h3 {
   @apply text-6xl font-bold text-slate-800;
+  @variant dark {
+    @apply text-white;
+  }
 }
 
 .customer-count .count-item p {

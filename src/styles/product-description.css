@@ -22,6 +22,9 @@
 
 .product-description-tab.is-active {
   @apply text-slate-700;
+  @variant dark {
+    @apply text-slate-300;
+  }
 }
 
 .product-description-content {

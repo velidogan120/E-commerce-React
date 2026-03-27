@@ -1,5 +1,6 @@
 import { useLocation } from "react-router";
 import "../styles/page-flag.css";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 
 const flagData = {
   home: {
@@ -35,7 +36,29 @@ const PageFlag = () => {
           <p className="flag-badge">{data.badge}</p>
           <h1 className="flag-header">{data.header}</h1>
           <p className="flag-text">{data.text}</p>
-          <button className="btn flag-button">{data.buttonText}</button>
+          {data.badge !== "CONTACT US" && (
+            <button className="btn flag-button">{data.buttonText}</button>
+          )}
+          {data.badge === "CONTACT US" && (
+            <div className="contact-info">
+              <p>{data.phone}</p>
+              <p>{data.fax}</p>
+              <div className="contact-icons">
+                <a href="#" title="Instagram">
+                  <Twitter fill="currentColor" size={30} />
+                </a>
+                <a href="#" title="Youtube">
+                  <Facebook fill="currentColor" size={30} />
+                </a>
+                <a href="#" title="Facebook">
+                  <Instagram size={30} />
+                </a>
+                <a href="#" title="Twitter">
+                  <Linkedin size={30} />
+                </a>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="flag-image">

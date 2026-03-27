@@ -20,7 +20,7 @@ const FeaturedProducts = () => {
             }).map((_, index) => <FeaturedProduct key={index} index={index} />),
           )}
         </div>
-        {location.pathname === "/shop" && (
+        {location.pathname === "/" && (
           <button className="btn featured-products-button">
             LOAD MORE PRODUCTS
           </button>

@@ -37,6 +37,9 @@
 
 .breadcrumb-info a {
   @apply text-slate-800;
+}
+
+.breadcrumb.other .breadcrumb-info a {
   @variant dark {
     @apply text-white;
   }

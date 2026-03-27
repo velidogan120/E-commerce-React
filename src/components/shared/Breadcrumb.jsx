@@ -7,12 +7,21 @@ const breadcrumbData = {
     title: "Shop",
     path: "Shop",
   },
+  product: {
+    path: "Shop",
+  },
   price: {
     title: "Simple Pricing",
     info: "PRICING",
     path: "Pricing",
   },
+  team: {
+    title: "Innovation tailored for you",
+    info: "WHAT WE DO",
+    path: "Team",
+  },
 };
+
 const Breadcrumb = () => {
   const location = useLocation();
   const currentPath = location.pathname.split("/")[1];
@@ -24,13 +33,15 @@ const Breadcrumb = () => {
             {breadcrumbData[currentPath].info}
           </p>
         )}
-        <h2>{breadcrumbData[currentPath]?.title || "Shop"}</h2>
+        {!location.pathname.startsWith("/shop/") && (
+          <h2>{breadcrumbData[currentPath]?.title || "Shop"}</h2>
+        )}
         <div className="breadcrumb-info">
           <NavLink to="/" className="breadcrumb-link">
             Home
           </NavLink>
           <span className="breadcrumb-separator">
-            <ChevronRight />
+            <ChevronRight className="text-neutral-500" />
           </span>
           <NavLink to="/shop" className="breadcrumb-link">
             {breadcrumbData[currentPath]?.path || "SHOP"}
