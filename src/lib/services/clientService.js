@@ -13,3 +13,8 @@ export const roles = async () => {
   const res = await eCommerceApi.get("/roles");
   return res.data;
 };
+
+export const verifyTokenApi = async () => {
+  const res = await eCommerceApi.get("/verify");
+  return res.data;
+};

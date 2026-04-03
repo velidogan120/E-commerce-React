@@ -7,14 +7,14 @@ const eCommerceApi = axios.create({
   },
 });
 
-// eCommerceApi.interceptors.request.use((config) => {
-//   const token = localStorage.getItem("token");
+eCommerceApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
 
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
+  if (token) {
+    config.headers.Authorization = `${token}`;
+  }
 
-//   return config;
-// });
+  return config;
+});
 
 export { eCommerceApi };

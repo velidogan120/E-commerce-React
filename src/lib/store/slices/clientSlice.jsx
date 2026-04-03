@@ -14,16 +14,18 @@ const clientSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUser: (state, action) => {
-      const { email, name, role_id, token, rememberMe } = action.payload;
+      const {
+        email,
+        name,
+        role_id,
+        token,
+        rememberMe = false,
+      } = action.payload;
 
       state.user = { email, name, role_id, token };
 
-      if (rememberMe) {
+      if (rememberMe || token !== localStorage.getItem("token")) {
         localStorage.setItem("token", token);
-        sessionStorage.removeItem("token");
-      } else {
-        sessionStorage.setItem("token", token);
-        localStorage.removeItem("token");
       }
     },
     setRoles: (state, action) => {
@@ -37,11 +39,9 @@ const clientSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
-      state.token = null;
       state.roles = [];
 
       localStorage.removeItem("token");
-      sessionStorage.removeItem("token");
     },
   },
 });

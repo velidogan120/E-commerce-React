@@ -2,7 +2,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
-import { login, roles, signup } from "../lib/services/clientService";
+import {
+  login,
+  roles,
+  signup,
+  verifyTokenApi,
+} from "../lib/services/clientService";
 import { logout, setUser } from "../lib/store/slices/clientSlice";
 
 export const useSignUp = () => {
@@ -75,5 +80,15 @@ export const useRoles = () => {
   return useQuery({
     queryKey: ["roles"],
     queryFn: roles,
+  });
+};
+
+export const useVerifyToken = () => {
+  const dispatch = useDispatch();
+  return useMutation({
+    mutationFn: () => verifyTokenApi(),
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+    },
   });
 };

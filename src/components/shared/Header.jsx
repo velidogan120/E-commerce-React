@@ -22,6 +22,7 @@ import "../../../src/styles/header.css";
 import { useTheme } from "../../hooks/useTheme";
 import { logout } from "../../lib/store/slices/clientSlice";
 import Gravatar from "./Gravatar";
+import { useVerifyToken } from "../../hooks/useAuth";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,16 +31,18 @@ export default function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [, setSearchParams] = useSearchParams();
+  const { mutate: verifyToken } = useVerifyToken();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMenuOpen(false);
       }
     };
+    verifyToken();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [verifyToken]);
 
   const navLinks = [
     { label: "Home", href: "/" },
