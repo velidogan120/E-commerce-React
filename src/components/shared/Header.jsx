@@ -1,27 +1,35 @@
-import { useEffect, useState } from "react";
 import {
+  Facebook,
+  Heart,
+  Instagram,
+  LogOut,
+  Mail,
+  Menu,
+  Moon,
+  Phone,
   Search,
   ShoppingCart,
-  Menu,
-  X,
-  Phone,
-  Mail,
-  Instagram,
-  Facebook,
-  Twitter,
-  Youtube,
-  Heart,
-  User,
-  Moon,
   Sun,
+  Twitter,
+  User,
+  X,
+  Youtube,
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useSearchParams } from "react-router";
 import "../../../src/styles/header.css";
 import { useTheme } from "../../hooks/useTheme";
+import { logout } from "../../lib/store/slices/clientSlice";
+import Gravatar from "./Gravatar";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { handleToggleTheme, theme } = useTheme();
-
+  const { user } = useSelector((state) => state.client);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [, setSearchParams] = useSearchParams();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -41,6 +49,11 @@ export default function Header() {
     { label: "Team", href: "/team" },
     { label: "Contact", href: "/contact" },
   ];
+
+  const handleRoute = () => {
+    const redirectPath = location.pathname + location.search;
+    setSearchParams({ redirect: encodeURIComponent(redirectPath) });
+  };
 
   return (
     <header className="h-full">
@@ -97,31 +110,58 @@ export default function Header() {
           <div className={`nav-menu ${isMenuOpen ? "is-open" : ""}`}>
             <div className="menu-links">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   className="nav-link"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
 
             <div className="menu-icons">
-              <button className="icon-button" aria-label="Search">
-                <User size={20} />{" "}
-                <span className="font-bold">Login / Register</span>
-              </button>
-              <button className="icon-button" aria-label="Search">
-                <Search size={20} />
-              </button>
-              <button className="icon-button" aria-label="Shopping cart">
-                <ShoppingCart size={20} /> 1
-              </button>
-              <button className="icon-button" aria-label="Search">
-                <Heart size={20} /> 1
-              </button>
+              {user ? (
+                <>
+                  <Gravatar email={user.email} />
+                  <p>{user.name}</p>
+                  <button
+                    className="icon-button"
+                    onClick={() => dispatch(logout())}
+                  >
+                    <LogOut />
+                  </button>
+                  <button className="icon-button">
+                    <Search size={20} />
+                  </button>
+                  <button className="icon-button">
+                    <ShoppingCart size={20} /> 1
+                  </button>
+                  <button className="icon-button">
+                    <Heart size={20} /> 1
+                  </button>
+                </>
+              ) : (
+                <span className="login-register-btn">
+                  <User size={20} />
+                  <Link
+                    className="icon-button"
+                    to="/login"
+                    onClick={handleRoute}
+                  >
+                    Login
+                  </Link>
+                  <span>/</span>
+                  <Link
+                    className="icon-button"
+                    to="/signup"
+                    onClick={handleRoute}
+                  >
+                    Register
+                  </Link>
+                </span>
+              )}
               {
                 <button className="icon-button" onClick={handleToggleTheme}>
                   {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}

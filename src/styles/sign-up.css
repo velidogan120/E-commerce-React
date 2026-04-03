@@ -1,7 +1,7 @@
 @import "../tailwind-ref.css";
 
 .form-signup {
-  @apply container mx-auto mt-10 p-6;
+  @apply container mx-auto lg:w-135 mt-10 p-6;
   @variant dark {
     @apply bg-slate-800;
   }

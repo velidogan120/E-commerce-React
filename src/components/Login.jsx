@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useLogin } from "../hooks/useAuth";
 import "../styles/login.css";
+import { PacmanLoader } from "react-spinners";
 const Login = () => {
-  const { mutate, isPending, error } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const {
     register,
@@ -69,8 +70,6 @@ const Login = () => {
             {isPending ? <PacmanLoader /> : "Login"}
           </button>
         </div>
-
-        {error && <p>Giriş başarısız</p>}
       </form>
     </>
   );

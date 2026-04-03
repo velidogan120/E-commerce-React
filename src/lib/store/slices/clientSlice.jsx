@@ -14,7 +14,17 @@ const clientSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
+      const { email, name, role_id, token, rememberMe } = action.payload;
+
+      state.user = { email, name, role_id, token };
+
+      if (rememberMe) {
+        localStorage.setItem("token", token);
+        sessionStorage.removeItem("token");
+      } else {
+        sessionStorage.setItem("token", token);
+        localStorage.removeItem("token");
+      }
     },
     setRoles: (state, action) => {
       state.roles = action.payload;
@@ -25,10 +35,18 @@ const clientSlice = createSlice({
     setLanguage: (state, action) => {
       state.language = action.payload;
     },
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.roles = [];
+
+      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
+    },
   },
 });
 
-export const { setUser, setRoles, toggleTheme, setLanguage } =
+export const { setUser, setRoles, toggleTheme, setLanguage, logout } =
   clientSlice.actions;
 
 export default clientSlice.reducer;

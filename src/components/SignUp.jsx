@@ -1,14 +1,15 @@
-import { useForm, useWatch } from "react-hook-form";
-import { useRoles, useSignUp } from "../hooks/useAuth";
-import { useNavigate } from "react-router";
-import { PacmanLoader } from "react-spinners";
 import { useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { PacmanLoader } from "react-spinners";
+import { useRoles, useSignUp } from "../hooks/useAuth";
+import { setRoles } from "../lib/store/slices/clientSlice";
 import "../styles/sign-up.css";
-import { setRoles } from "../lib/store/slices/authSlice";
+import Loading from "./shared/Loading";
+import { useDispatch } from "react-redux";
 const SignUp = () => {
-  const navigate = useNavigate();
-  const { mutate, isPending, error } = useSignUp();
+  const { mutate, isPending } = useSignUp();
   const { data: roles = [] } = useRoles();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -17,17 +18,22 @@ const SignUp = () => {
     getValues,
     trigger,
     control,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      role_id: "2",
+    },
+  });
   const passwordValidation = useWatch({ control, name: "password" });
+  const roleValidation = useWatch({ control, name: "role_id" });
 
   useEffect(() => {
     if (passwordValidation) {
       trigger("passwordValidation");
     }
     if (roles.length === 0) {
-      setRoles(roles);
+      dispatch(setRoles(roles));
     }
-  }, [passwordValidation, trigger, roles]);
+  }, [passwordValidation, trigger, roles, dispatch]);
 
   const onSubmit = (data) => {
     const payload = {
@@ -37,7 +43,7 @@ const SignUp = () => {
       role_id: data.role_id,
     };
 
-    if (String(data.role_id) === "1") {
+    if (String(data.role_id) === "2") {
       payload.store = {
         name: data.store_name,
         phone: data.phone,
@@ -46,11 +52,11 @@ const SignUp = () => {
       };
     }
 
-    mutate(payload, {
-      onSuccess: () => navigate("/"),
-    });
+    mutate(payload);
   };
-
+  if (roles.length === 0) {
+    return <Loading />;
+  }
   return (
     <>
       <h1 className="form-header">SIGN UP</h1>
@@ -102,7 +108,7 @@ const SignUp = () => {
               minLength: { value: 8, message: "Şifre en az 8 karakter olmalı" },
               pattern: {
                 value:
-                  /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/,
                 message:
                   "Şifre en az bir büyük harf, bir küçük harf, özel karakter ve bir rakam içermelidir",
               },
@@ -135,20 +141,34 @@ const SignUp = () => {
             Role
           </label>
 
-          <select {...register("role_id")} className="form-select">
-            <option value="0">Bir rol seçiniz</option>
-            {Object.keys(roles).map((key) => (
-              <option key={key} value={key} defaultValue={key === "2"}>
-                {roles[key].name}
-              </option>
-            ))}
+          <select
+            {...register("role_id", {
+              required: {
+                value: true,
+                message: "Bir rol seçiniz",
+              },
+              validate: (value) =>
+                roles.map((role) => role.id).includes(Number(value)) ||
+                "Uygun rol seçiniz",
+            })}
+            className="form-select"
+          >
+            <option value="" disabled>
+              Bir rol seçiniz
+            </option>
+            {Array.isArray(roles) &&
+              roles.map((value, index) => (
+                <option key={index} value={value.id}>
+                  {value.name}
+                </option>
+              ))}
           </select>
           {errors.role_id && (
             <p className="form-error">{errors.role_id.message}</p>
           )}
         </div>
 
-        {getValues("role_id") === "1" && (
+        {roleValidation === "2" && (
           <>
             <div className="form-group">
               <label htmlFor="store_name" className="form-label">
@@ -231,7 +251,7 @@ const SignUp = () => {
                     message: "Hesap numarası zorunludur",
                   },
                   pattern: {
-                    value: /^TR\d{2}\d{4}\d{4}\d{4}\d{4}\d{2}$/,
+                    value: /^TR\d{2}(?:\s?\d{4}){5}\s?\d{2}$/,
                     message: "Lütfen geçerli bir IBAN adresi girin",
                   },
                 })}
@@ -247,8 +267,6 @@ const SignUp = () => {
             {isPending ? <PacmanLoader /> : "Sign Up"}
           </button>
         </div>
-
-        {error && <p className="form-error">Kayıt başarısız</p>}
       </form>
     </>
   );

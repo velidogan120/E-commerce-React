@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const eCommerceApi = axios.create({
-  baseURL: import.meta.env.VITE_E_COMMERCE_API_URL || "http://localhost:5173/",
+  baseURL: import.meta.env.VITE_E_COMMERCE_API || "http://localhost:5173/",
   headers: {
     "Content-Type": "application/json",
   },

@@ -75,6 +75,10 @@
   @apply flex items-center flex-col gap-3 px-6 py-4;
 }
 
+.menu-icons .login-register-btn {
+  @apply flex items-center gap-1 text-sky-500;
+}
+
 @media (min-width: 1024px) {
   .menu-links {
     @apply flex-row items-center gap-8;
