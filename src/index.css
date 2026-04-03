@@ -49,11 +49,85 @@ body {
   @apply text-teal-700;
 }
 
-input,
+input:not([type="checkbox"]),
 select {
-  @apply w-full py-5 px-5 rounded-md bg-zinc-50 placeholder:font-bold border placeholder:text-gray-500 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  @apply w-full py-5 px-5 rounded-sm bg-zinc-50 placeholder:font-bold border placeholder:text-gray-500 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  @variant dark {
+    @apply bg-slate-800 text-white;
+  }
 }
 
 .card-colors {
   @apply flex gap-2 items-center bg-white p-3 rounded-lg w-max;
+}
+
+.form-header {
+  @apply text-center text-3xl font-bold mb-6;
+}
+
+form {
+  @apply flex flex-wrap gap-2;
+}
+
+form .form-group {
+  @apply w-full lg:w-[48%];
+}
+
+form .form-btn {
+  @apply w-full text-center;
+}
+
+form .form-btn button {
+  @apply px-15 py-4 text-2xl hover:bg-white hover:text-sky-600 hover:border-sky-600 border-2 border-transparent transition-colors duration-300;
+}
+
+.form-group {
+  @apply flex flex-col gap-4 my-4;
+}
+
+.form-group .form-input,
+.form-group .form-select {
+  @apply p-3 placeholder:font-normal placeholder:text-sm;
+}
+
+.form-group .form-label {
+  @apply text-lg;
+}
+
+.form-group-checkbox {
+  @apply flex items-center gap-2;
+}
+
+.form-group-checkbox .form-input {
+  @apply appearance-none relative h-6 w-6 rounded-md border border-slate-300 bg-white cursor-pointer transition-colors duration-200;
+}
+
+.form-group-checkbox .form-input::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: 6px;
+  height: 11px;
+  border: 2px solid #fff;
+  border-top: 0;
+  border-left: 0;
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+}
+
+.form-group-checkbox .form-input:checked {
+  @apply bg-sky-500 border-sky-500;
+}
+
+.form-group-checkbox .form-input:checked::before {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.form-group-checkbox .form-input:focus-visible {
+  @apply outline-none ring-2 ring-sky-200 ring-offset-1;
+}
+
+.form-group .form-error {
+  @apply text-xs border border-red-500 text-red-500 rounded-sm p-2;
 }

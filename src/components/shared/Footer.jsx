@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 const Footer = () => {
   const location = useLocation();
   return (
-    <div className="footer">
+    <footer className="footer">
       <div
         className={`footer-top ${location.pathname === "/" ? "home" : "other"}`}
       >
@@ -114,7 +114,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

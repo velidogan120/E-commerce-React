@@ -1,0 +1,20 @@
+@import "../tailwind-ref.css";
+
+.form-login {
+  @apply container mx-auto p-6 flex flex-col items-start lg:w-135;
+  @variant dark {
+    @apply bg-slate-800;
+  }
+}
+
+.form-login .form-group {
+  @apply w-full;
+}
+
+.form-group-checkbox {
+  @apply my-8;
+}
+
+.form-group-checkbox .form-label {
+  @apply whitespace-nowrap;
+}
