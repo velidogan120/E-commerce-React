@@ -21,7 +21,7 @@
 }
 
 .featured-product img {
-  @apply w-full;
+  @apply w-full h-full;
 }
 
 .featured-product h5 {

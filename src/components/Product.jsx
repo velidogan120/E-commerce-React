@@ -8,49 +8,28 @@ import {
   Star,
 } from "lucide-react";
 import "../styles/product.css";
+import { useProductById } from "../hooks/useProducts";
+import { useParams } from "react-router";
 
-const Product = ({ productId }) => {
-  const gallery = useMemo(
-    () => ["/product/product-1.jpg", "/product/product-2.jpg"],
-    [],
-  );
+const Product = () => {
+  const { productId } = useParams();
+  const { data } = useProductById(productId);
+
+  const activeProduct = data ?? {};
+  const gallery = useMemo(() => {
+    const images = activeProduct.images
+      ?.map((image) => image.url)
+      .filter(Boolean);
+
+    return images?.length ? images : ["/product/product-1.jpg"];
+  }, [activeProduct.images]);
 
   const [activeImage, setActiveImage] = useState(0);
-
-  const activeProduct = useMemo(() => {
-    const catalog = {
-      1: {
-        title: "Floating Phone",
-        price: "$1,139.33",
-        reviews: 10,
-        description:
-          "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequat door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.",
-      },
-      2: {
-        title: "Modern Accent Chair",
-        price: "$899.00",
-        reviews: 18,
-        description:
-          "Structured comfort for contemporary spaces. Designed with balanced proportions and premium material details for daily living.",
-      },
-      3: {
-        title: "Premium Lifestyle Set",
-        price: "$729.50",
-        reviews: 14,
-        description:
-          "A curated everyday collection built for utility and style. Crafted for people who want clean lines and timeless textures.",
-      },
-      default: {
-        title: "Floating Phone",
-        price: "$1,139.33",
-        reviews: 10,
-        description:
-          "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequat door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.",
-      },
-    };
-
-    return catalog[productId] ?? catalog.default;
-  }, [productId]);
+  const title = activeProduct.name ?? "Product";
+  const price = activeProduct.price ? `$${activeProduct.price}` : "$0.00";
+  const rating = activeProduct.rating ?? 0;
+  const reviews = activeProduct.sell_count ?? 0;
+  const availability = activeProduct.stock > 0 ? "In Stock" : "Out of Stock";
 
   const goNext = () => {
     setActiveImage((current) =>
@@ -73,20 +52,18 @@ const Product = ({ productId }) => {
               type="button"
               className="product-gallery-nav product-gallery-nav-left"
               onClick={goPrev}
-              aria-label="Previous image"
             >
               <ChevronLeft size={38} />
             </button>
             <img
               src={gallery[activeImage]}
-              alt={`${activeProduct.title} preview ${activeImage + 1}`}
+              alt={`${title} preview ${activeImage + 1}`}
               className="product-gallery-main-image"
             />
             <button
               type="button"
               className="product-gallery-nav product-gallery-nav-right"
               onClick={goNext}
-              aria-label="Next image"
             >
               <ChevronRight size={38} />
             </button>
@@ -99,47 +76,43 @@ const Product = ({ productId }) => {
                 key={image}
                 className={`product-thumb ${activeImage === index ? "is-active" : ""}`}
                 onClick={() => setActiveImage(index)}
-                aria-label={`Open image ${index + 1}`}
               >
-                <img
-                  src={image}
-                  alt={`${activeProduct.title} thumbnail ${index + 1}`}
-                />
+                <img src={image} alt={`${title} thumbnail ${index + 1}`} />
               </button>
             ))}
           </div>
         </div>
 
         <div className="product-detail-info">
-          <h1>{activeProduct.title}</h1>
+          <h1>{title}</h1>
 
           <div className="product-rating-row">
-            <div className="product-stars" aria-label="Rated 4 out of 5">
+            <div className="product-stars">
               {Array.from({ length: 5 }).map((_, index) => (
                 <Star
                   key={`star-${index}`}
                   size={18}
-                  className={index < 4 ? "is-filled" : ""}
-                  fill={index < 4 ? "currentColor" : "none"}
+                  className={index < Math.round(rating) ? "is-filled" : ""}
+                  fill={index < Math.round(rating) ? "currentColor" : "none"}
                 />
               ))}
             </div>
-            <p>{activeProduct.reviews} Reviews</p>
+            <p>{reviews} Reviews</p>
           </div>
 
-          <p className="product-price">{activeProduct.price}</p>
+          <p className="product-price">{price}</p>
 
           <p className="product-stock">
-            Availability : <span>In Stock</span>
+            Availability : <span>{availability}</span>
           </p>
 
           <p className="product-detail-description">
-            {activeProduct.description}
+            {activeProduct.description ?? ""}
           </p>
 
           <hr className="product-divider" />
 
-          <div className="product-colors" aria-label="Available colors">
+          <div className="product-colors">
             <span className="color-dot color-dot-blue" />
             <span className="color-dot color-dot-green" />
             <span className="color-dot color-dot-orange" />
@@ -150,25 +123,13 @@ const Product = ({ productId }) => {
             <button type="button" className="product-select-btn">
               Select Options
             </button>
-            <button
-              type="button"
-              className="product-icon-btn"
-              aria-label="Add to wishlist"
-            >
+            <button type="button" className="product-icon-btn">
               <Heart size={20} />
             </button>
-            <button
-              type="button"
-              className="product-icon-btn"
-              aria-label="Add to cart"
-            >
+            <button type="button" className="product-icon-btn">
               <ShoppingCart size={20} />
             </button>
-            <button
-              type="button"
-              className="product-icon-btn"
-              aria-label="Quick preview"
-            >
+            <button type="button" className="product-icon-btn">
               <Eye size={20} />
             </button>
           </div>

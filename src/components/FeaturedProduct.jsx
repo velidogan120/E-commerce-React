@@ -1,23 +1,28 @@
 import { Circle } from "lucide-react";
 import "../styles/featured-product.css";
 import { Link, useLocation } from "react-router";
-const FeaturedProduct = ({ index }) => {
+const FeaturedProduct = ({ product }) => {
   const location = useLocation();
-  const productId = index + 1;
+  const imageSrc =
+    product?.images[0].url ??
+    `/featured-products/featured-product-${product?.id ? product.id + 1 : 1}.jpg`;
+  const title = product?.description ?? "Graphic Design";
+  const category = product?.category ?? "English Department";
+  const price = product?.price ? `$${product.price}` : "$6.48";
 
   return (
     <div className="featured-product">
       <Link
-        to={`/shop/${productId}`}
+        to={`${location.pathname}/products/${product?.id}`}
         className={`${location.pathname.startsWith("/shop/") ? "product" : ""}`}
       >
-        <img src={`/featured-products/featured-product-${index + 1}.jpg`} />
+        <img src={imageSrc} alt={title} />
         <div className="product-padding">
-          <h5>Graphic Design</h5>
-          <p>English Department</p>
+          <h5>{title}</h5>
+          <p>{category}</p>
           <div className="price">
             <p className="price-old">$16.48</p>
-            <p className="price-new">$6.48</p>
+            <p className="price-new">{price}</p>
           </div>
         </div>
       </Link>

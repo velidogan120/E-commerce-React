@@ -4,7 +4,7 @@ const ShopCategoriesCard = ({ index }) => {
   return (
     <div className="shop-categories-card">
       <img
-        src={`./shop/shop-${index + 1}.jpg`}
+        src={`/shop/shop-${index + 1}.jpg`}
         alt={`Shop Category ${index + 1}`}
       />
       <div>

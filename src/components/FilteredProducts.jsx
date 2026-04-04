@@ -1,29 +1,17 @@
-import FeaturedProduct from "./FeaturedProduct";
+import { useSelector } from "react-redux";
 import "../styles/filtered-products.css";
-import { useEffect, useState } from "react";
+import FeaturedProduct from "./FeaturedProduct";
 const FilteredProducts = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsMenuOpen(true);
-      }
-    };
+  const products = useSelector((state) => state.product.products);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const displayedProducts =
+    products?.length > 0 ? products : Array.from({ length: 4 }, () => null);
+
   return (
     <div className="filtered-products">
-      {Array.from({ length: 4 }).map((_, index) => (
-        <FeaturedProduct key={index} index={index} />
+      {displayedProducts.map((product, index) => (
+        <FeaturedProduct key={product?.id ?? index} product={product} />
       ))}
-      {isMenuOpen &&
-        Array.from({ length: 2 }).map(() =>
-          Array.from({ length: 4 }).map((_, index) => (
-            <FeaturedProduct key={index} index={index} />
-          )),
-        )}
     </div>
   );
 };

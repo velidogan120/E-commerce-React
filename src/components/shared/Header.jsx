@@ -25,7 +25,10 @@ import { logout } from "../../lib/store/slices/clientSlice";
 import Gravatar from "./Gravatar";
 import { useVerifyToken } from "../../hooks/useAuth";
 import { useCategories } from "../../hooks/useProducts";
-import { setCategories } from "../../lib/store/slices/productSlice";
+import {
+  setCategories,
+  setCategoryId,
+} from "../../lib/store/slices/productSlice";
 import Loading from "./Loading";
 
 export default function Header() {
@@ -72,6 +75,16 @@ export default function Header() {
   const menCategories = categories.filter(
     (category) => category.gender === "e",
   );
+  const slugify = (text) =>
+    text
+      .toLowerCase()
+      .replace(/ğ/g, "g")
+      .replace(/ü/g, "u")
+      .replace(/ş/g, "s")
+      .replace(/ı/g, "i")
+      .replace(/ö/g, "o")
+      .replace(/ç/g, "c")
+      .replace(/\s+/g, "-");
 
   if (isPending) {
     return <Loading />;
@@ -153,17 +166,21 @@ export default function Header() {
                     <div
                       className={`nav-link-dropdown-content ${isShopMenuOpen ? "is-open-mobile" : ""}`}
                     >
+                      <Link to="/shop" className="nav-link-dropdown-all">
+                        Tüm Kategoriler
+                      </Link>
                       <div className="nav-link-dropdown-columns">
                         <div className="nav-link-dropdown-group">
                           <p className="nav-link-dropdown-title">Kadın</p>
                           {womenCategories.map((category) => (
                             <Link
                               key={category.id}
-                              to={`/shop?category=${encodeURIComponent(category.code ?? category.id)}`}
+                              to={`/shop/kadin/${slugify(category.title)}/${category.id}`}
                               className="nav-link-dropdown-item"
                               onClick={() => {
                                 setIsMenuOpen(false);
                                 setIsShopMenuOpen(false);
+                                dispatch(setCategoryId(category.id));
                               }}
                             >
                               {category.title}
@@ -175,11 +192,12 @@ export default function Header() {
                           {menCategories.map((category) => (
                             <Link
                               key={category.id}
-                              to={`/shop?category=${encodeURIComponent(category.code ?? category.id)}`}
+                              to={`/shop/erkek/${slugify(category.title)}/${category.id}`}
                               className="nav-link-dropdown-item"
                               onClick={() => {
                                 setIsMenuOpen(false);
                                 setIsShopMenuOpen(false);
+                                dispatch(setCategoryId(category.id));
                               }}
                             >
                               {category.title}

@@ -15,9 +15,12 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="shop" element={<ShopLayout />}>
+        <Route
+          path="shop/:gender?/:categoryName?/:categoryId?"
+          element={<ShopLayout />}
+        >
           <Route index element={<ShopPage />} />
-          <Route path=":id" element={<ProductPage />} />
+          <Route path=":productNameSlug/:productId" element={<ProductPage />} />
         </Route>
         <Route path="about" element={<AboutPage />} />
         <Route path="price" element={<PricePage />} />
