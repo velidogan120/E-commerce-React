@@ -42,9 +42,57 @@
 }
 
 .nav-link {
-  @apply text-neutral-500 font-bold hover:text-slate-800 transition-colors block px-6 py-3;
+  @apply text-neutral-500 font-bold hover:text-slate-800 transition-colors px-6 py-3 flex;
   @variant dark {
     @apply text-neutral-400 hover:text-gray-300;
+  }
+}
+
+.nav-link-trigger {
+  @apply items-center justify-center gap-1 bg-transparent;
+}
+
+.nav-link-dropdown {
+  @apply relative;
+}
+
+.shop-dropdown-backdrop {
+  @apply fixed inset-0 z-40 block bg-transparent;
+}
+
+.nav-link-dropdown-content {
+  @apply hidden absolute z-50 mt-2 left-1/2 -translate-x-1/2 rounded-lg border border-slate-200 bg-white p-5 shadow-lg;
+  @variant dark {
+    @apply border-slate-700 bg-slate-900;
+  }
+}
+
+.nav-link-dropdown-content.is-open-mobile {
+  @apply block;
+}
+
+.nav-link-dropdown-all {
+  @apply block border-b border-slate-200 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100;
+  @variant dark {
+    @apply border-slate-700 text-slate-100 hover:bg-slate-800;
+  }
+}
+
+.nav-link-dropdown-columns {
+  @apply flex gap-15 px-3 py-2;
+}
+
+.nav-link-dropdown-title {
+  @apply px-1 pb-1 text-xs font-bold uppercase tracking-wide text-slate-500;
+  @variant dark {
+    @apply text-slate-400;
+  }
+}
+
+.nav-link-dropdown-item {
+  @apply block rounded-md px-4 py-2 text-sm text-slate-700 transition-colors hover:bg-slate-100;
+  @variant dark {
+    @apply text-slate-200 hover:bg-slate-800;
   }
 }
 
@@ -65,6 +113,9 @@
 
 .nav-menu.is-open {
   @apply absolute left-0 right-0 top-full z-50 flex flex-col bg-white border-b border-gray-200 lg:border-0;
+  @variant dark {
+    @apply bg-slate-900 border-slate-700;
+  }
 }
 
 .menu-links {
@@ -86,6 +137,14 @@
 
   .menu-links .nav-link {
     @apply p-0 border-0 text-sm;
+  }
+
+  .nav-link-trigger {
+    @apply justify-start;
+  }
+
+  .nav-link-dropdown-content {
+    @apply left-32;
   }
 
   .menu-icons {

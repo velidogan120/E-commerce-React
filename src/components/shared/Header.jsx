@@ -1,4 +1,5 @@
 import {
+  ChevronDown,
   Facebook,
   Heart,
   Instagram,
@@ -23,11 +24,16 @@ import { useTheme } from "../../hooks/useTheme";
 import { logout } from "../../lib/store/slices/clientSlice";
 import Gravatar from "./Gravatar";
 import { useVerifyToken } from "../../hooks/useAuth";
+import { useCategories } from "../../hooks/useProducts";
+import { setCategories } from "../../lib/store/slices/productSlice";
+import Loading from "./Loading";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
   const { handleToggleTheme, theme } = useTheme();
   const { user } = useSelector((state) => state.client);
+  const { data: categories = [], isPending } = useCategories();
   const dispatch = useDispatch();
   const location = useLocation();
   const [, setSearchParams] = useSearchParams();
@@ -36,17 +42,19 @@ export default function Header() {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMenuOpen(false);
+        setIsShopMenuOpen(false);
       }
     };
     verifyToken();
+    dispatch(setCategories(categories));
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [verifyToken]);
+  }, [verifyToken, categories, dispatch]);
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Product", href: "/shop" },
+    { label: "Shop", href: "/shop" },
     { label: "About", href: "/about" },
     { label: "Pricing", href: "/price" },
     { label: "Team", href: "/team" },
@@ -57,6 +65,17 @@ export default function Header() {
     const redirectPath = location.pathname + location.search;
     setSearchParams({ redirect: encodeURIComponent(redirectPath) });
   };
+
+  const womenCategories = categories.filter(
+    (category) => category.gender === "k",
+  );
+  const menCategories = categories.filter(
+    (category) => category.gender === "e",
+  );
+
+  if (isPending) {
+    return <Loading />;
+  }
 
   return (
     <header className="h-full">
@@ -112,18 +131,80 @@ export default function Header() {
 
           <div className={`nav-menu ${isMenuOpen ? "is-open" : ""}`}>
             <div className="menu-links">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="nav-link"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) =>
+                link.href === "/shop" ? (
+                  <div key={link.href} className="nav-link-dropdown">
+                    <button
+                      type="button"
+                      className="nav-link nav-link-trigger"
+                      aria-expanded={isShopMenuOpen}
+                      onClick={() => setIsShopMenuOpen((prev) => !prev)}
+                    >
+                      {link.label}
+                      <ChevronDown size={16} />
+                    </button>
+                    {isShopMenuOpen && (
+                      <button
+                        type="button"
+                        className="shop-dropdown-backdrop"
+                        onClick={() => setIsShopMenuOpen(false)}
+                      />
+                    )}
+                    <div
+                      className={`nav-link-dropdown-content ${isShopMenuOpen ? "is-open-mobile" : ""}`}
+                    >
+                      <div className="nav-link-dropdown-columns">
+                        <div className="nav-link-dropdown-group">
+                          <p className="nav-link-dropdown-title">Kadın</p>
+                          {womenCategories.map((category) => (
+                            <Link
+                              key={category.id}
+                              to={`/shop?category=${encodeURIComponent(category.code ?? category.id)}`}
+                              className="nav-link-dropdown-item"
+                              onClick={() => {
+                                setIsMenuOpen(false);
+                                setIsShopMenuOpen(false);
+                              }}
+                            >
+                              {category.title}
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="nav-link-dropdown-group">
+                          <p className="nav-link-dropdown-title">Erkek</p>
+                          {menCategories.map((category) => (
+                            <Link
+                              key={category.id}
+                              to={`/shop?category=${encodeURIComponent(category.code ?? category.id)}`}
+                              className="nav-link-dropdown-item"
+                              onClick={() => {
+                                setIsMenuOpen(false);
+                                setIsShopMenuOpen(false);
+                              }}
+                            >
+                              {category.title}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div key={link.href} className="nav-link-dropdown">
+                    <Link
+                      to={link.href}
+                      className="nav-link"
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setIsShopMenuOpen(false);
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  </div>
+                ),
+              )}
             </div>
-
             <div className="menu-icons">
               {user ? (
                 <>
