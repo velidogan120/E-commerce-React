@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -10,12 +10,17 @@ import {
 import "../styles/product.css";
 import { useProductById } from "../hooks/useProducts";
 import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import { setProduct } from "../lib/store/slices/productSlice";
+import { setCart } from "../lib/store/slices/shoppingCartSlice";
+import { toast } from "react-toastify";
 
 const Product = () => {
   const { productId } = useParams();
   const { data } = useProductById(productId);
+  const dispatch = useDispatch();
 
-  const activeProduct = data ?? {};
+  const activeProduct = useMemo(() => data ?? {}, [data]);
   const gallery = useMemo(() => {
     const images = activeProduct.images
       ?.map((image) => image.url)
@@ -31,17 +36,21 @@ const Product = () => {
   const reviews = activeProduct.sell_count ?? 0;
   const availability = activeProduct.stock > 0 ? "In Stock" : "Out of Stock";
 
-  const goNext = () => {
+  const goNext = useCallback(() => {
     setActiveImage((current) =>
       current + 1 < gallery.length ? current + 1 : 0,
     );
-  };
+  }, [gallery.length]);
 
-  const goPrev = () => {
+  const goPrev = useCallback(() => {
     setActiveImage((current) =>
       current - 1 >= 0 ? current - 1 : gallery.length - 1,
     );
-  };
+  }, [gallery.length]);
+
+  useEffect(() => {
+    dispatch(setProduct(activeProduct));
+  }, [activeProduct, dispatch]);
 
   return (
     <section className="product-detail-section">
@@ -126,7 +135,14 @@ const Product = () => {
             <button type="button" className="product-icon-btn">
               <Heart size={20} />
             </button>
-            <button type="button" className="product-icon-btn">
+            <button
+              type="button"
+              className="product-icon-btn"
+              onClick={() => {
+                dispatch(setCart(activeProduct));
+                toast.success("Ürün sepete eklendi!");
+              }}
+            >
               <ShoppingCart size={20} />
             </button>
             <button type="button" className="product-icon-btn">

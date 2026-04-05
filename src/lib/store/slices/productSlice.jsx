@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   categories: [],
   products: [],
+  product: null,
   total: 0,
   limit: 25,
   offset: 0,
@@ -43,6 +44,9 @@ const productSlice = createSlice({
     setCategoryId: (state, action) => {
       state.categoryId = action.payload;
     },
+    setProduct: (state, action) => {
+      state.product = action.payload;
+    },
   },
 });
 
@@ -56,6 +60,7 @@ export const {
   setFilter,
   setSort,
   setCategoryId,
+  setProduct,
 } = productSlice.actions;
 
 export default productSlice.reducer;

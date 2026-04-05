@@ -1,0 +1,61 @@
+@reference "../tailwind-ref.css";
+.shopping-cart-item {
+  @apply bg-slate-100 rounded-xl p-4;
+}
+
+.shopping-cart-item-seller {
+  @apply flex items-center gap-2 mb-3;
+}
+
+.shopping-cart-item-seller h3 {
+  @apply text-slate-800 font-semibold;
+}
+
+.shopping-cart-item-seller span {
+  @apply bg-green-700 text-white text-xs px-2 py-0.5 rounded-md font-semibold;
+}
+
+.shopping-cart-item-content {
+  @apply bg-white rounded-lg p-4 items-start gap-4 flex;
+}
+
+.shopping-cart-check {
+  @apply mt-2 h-4 w-4;
+}
+
+.shopping-cart-image {
+  @apply h-18 w-18 rounded-lg object-cover border border-slate-200;
+}
+
+.shopping-cart-details {
+  @apply min-w-0 me-auto;
+}
+
+.shopping-cart-name {
+  @apply font-bold text-slate-700 leading-5;
+}
+
+.shopping-cart-shipping {
+  @apply mt-2 text-slate-600;
+}
+
+.shopping-cart-shipping strong {
+  @apply text-slate-800;
+}
+
+.shopping-cart-actions {
+  @apply mt-3 flex items-center gap-3;
+}
+
+.shopping-cart-action-btn,
+.shopping-cart-delete-btn {
+  @apply h-8 w-8 rounded-md border border-slate-300 bg-slate-50 text-slate-600 inline-flex items-center justify-center transition-colors duration-200 hover:bg-slate-200;
+}
+
+.shopping-cart-count {
+  @apply text-base font-semibold text-slate-800 min-w-4 text-center;
+}
+
+.shopping-cart-price {
+  @apply text-xl font-bold text-slate-800 self-center whitespace-nowrap;
+}

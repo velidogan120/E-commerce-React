@@ -100,6 +100,108 @@
   @apply text-sky-500 transition-colors p-2 rounded-lg hover:bg-gray-100 flex items-center gap-1;
 }
 
+.cart-dropdown-wrapper {
+  @apply relative flex items-center;
+}
+
+.cart-button span {
+  @apply min-w-5 text-left font-bold;
+}
+
+.cart-dropdown-backdrop {
+  @apply fixed inset-0 z-40 block bg-transparent;
+}
+
+.cart-dropdown-panel {
+  @apply absolute right-0 top-full z-50 mt-3 w-[20rem] overflow-hidden rounded-md border border-slate-200 bg-white shadow-2xl;
+  @variant dark {
+    @apply border-slate-700 bg-slate-900;
+  }
+}
+
+.cart-dropdown-header {
+  @apply border-b border-slate-200 px-4 py-4;
+  @variant dark {
+    @apply border-slate-700;
+  }
+}
+
+.cart-dropdown-header h2 {
+  @apply text-lg font-bold text-slate-800;
+  @variant dark {
+    @apply text-slate-100;
+  }
+}
+
+.cart-dropdown-list {
+  @apply max-h-80 overflow-y-auto;
+}
+
+.cart-dropdown-item {
+  @apply flex gap-3 border-b border-slate-200 px-4 py-4 last:border-b-0;
+  @variant dark {
+    @apply border-slate-800;
+  }
+}
+
+.cart-dropdown-image {
+  @apply h-18 w-18 shrink-0 rounded-lg border border-slate-200 object-cover;
+}
+
+.cart-dropdown-info {
+  @apply flex-1;
+}
+
+.cart-dropdown-name {
+  @apply text-sm font-semibold leading-5 text-slate-800;
+  @variant dark {
+    @apply text-slate-100;
+  }
+}
+
+.cart-dropdown-subtitle {
+  @apply mt-2 text-slate-500;
+  @variant dark {
+    @apply text-slate-400;
+  }
+}
+
+.cart-dropdown-price {
+  @apply mt-2 text-base text-slate-800;
+  @variant dark {
+    @apply text-slate-100;
+  }
+}
+
+.cart-dropdown-empty {
+  @apply px-4 py-6 text-sm text-slate-500;
+  @variant dark {
+    @apply text-slate-400;
+  }
+}
+
+.cart-dropdown-actions {
+  @apply flex gap-3 border-t border-slate-200 bg-slate-50 p-4;
+  @variant dark {
+    @apply border-slate-700 bg-slate-950;
+  }
+}
+
+.cart-dropdown-action {
+  @apply flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold transition-colors;
+}
+
+.cart-dropdown-action-secondary {
+  @apply border border-slate-300 bg-white text-slate-700 hover:bg-slate-100;
+  @variant dark {
+    @apply border-slate-700 bg-slate-900 text-slate-100 hover:bg-slate-800;
+  }
+}
+
+.cart-dropdown-action-primary {
+  @apply bg-slate-800 text-white hover:bg-slate-700;
+}
+
 .mobile-menu-toggle {
   @apply lg:hidden ml-auto text-slate-800 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-gray-100;
   @variant dark {

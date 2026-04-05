@@ -1,0 +1,41 @@
+@reference "../tailwind-ref.css";
+
+.shopping-carts-section {
+  @apply container mx-auto px-4 py-6;
+}
+
+.shopping-carts-header {
+  @apply flex flex-wrap items-center justify-between gap-2 mb-4;
+}
+
+.shopping-carts-header h2 {
+  @apply text-slate-800 text-3xl font-bold;
+}
+
+.shopping-carts-header p {
+  @apply text-lg text-slate-500 font-bold;
+}
+
+.shopping-carts-container {
+  @apply flex flex-col lg:flex-row gap-6;
+}
+
+.shopping-carts-main {
+  @apply flex-1;
+}
+
+.shopping-carts-select-all {
+  @apply flex items-center gap-2 text-slate-700 mb-4;
+}
+
+.shopping-carts-select-all input {
+  @apply h-4 w-4;
+}
+
+.shopping-carts-list {
+  @apply flex flex-col gap-4;
+}
+
+.shopping-carts-empty {
+  @apply rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-slate-500 font-medium;
+}

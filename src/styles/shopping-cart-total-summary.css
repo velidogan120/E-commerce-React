@@ -1,0 +1,71 @@
+@import "../tailwind-ref.css";
+
+.shopping-cart-total-summary {
+  @apply bg-white rounded-xl border border-slate-200 p-6 self-start top-6 w-full lg:max-w-90 lg:mt-10;
+  @variant dark {
+    @apply border-slate-700 bg-slate-900;
+  }
+}
+
+.shopping-cart-total-header {
+  @apply mb-6;
+}
+
+.shopping-cart-total-header h3 {
+  @apply text-lg font-bold text-slate-800;
+  @variant dark {
+    @apply text-slate-100;
+  }
+}
+
+.shopping-cart-total-content {
+  @apply flex flex-col gap-y-3 mb-6;
+}
+
+.shopping-cart-total-row {
+  @apply flex items-center justify-between;
+}
+
+.shopping-cart-total-value {
+  @apply font-bold text-slate-800;
+}
+
+.shopping-cart-total-discount {
+  @apply text-green-600 font-semibold;
+  @variant dark {
+    @apply text-green-400;
+  }
+}
+
+.shopping-cart-total-divider {
+  @apply h-px bg-slate-200 my-4;
+  @variant dark {
+    @apply bg-slate-700;
+  }
+}
+
+.shopping-cart-total-row-final {
+  @apply justify-between items-center;
+}
+
+.shopping-cart-total-label-final {
+  @apply text-base font-bold;
+}
+
+.shopping-cart-total-value-final {
+  @apply text-lg font-bold text-slate-800;
+  @variant dark {
+    @apply text-slate-100;
+  }
+}
+
+.shopping-cart-total-checkout-btn {
+  @apply w-full bg-slate-800 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 mb-4 hover:bg-slate-700 disabled:bg-slate-300 disabled:cursor-not-allowed disabled:text-slate-500;
+}
+
+.shopping-cart-total-info {
+  @apply bg-slate-50 rounded-lg p-3 text-xs text-slate-600 text-center;
+  @variant dark {
+    @apply bg-slate-950 text-slate-400;
+  }
+}

@@ -34,8 +34,10 @@ import Loading from "./Loading";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
+  const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
   const { handleToggleTheme, theme } = useTheme();
   const { user } = useSelector((state) => state.client);
+  const cartItems = useSelector((state) => state.shoppingCart.cart);
   const { data: categories = [], isPending } = useCategories();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -67,6 +69,9 @@ export default function Header() {
   const handleRoute = () => {
     const redirectPath = location.pathname + location.search;
     setSearchParams({ redirect: encodeURIComponent(redirectPath) });
+    setIsMenuOpen(false);
+    setIsShopMenuOpen(false);
+    setIsCartMenuOpen(false);
   };
 
   const womenCategories = categories.filter(
@@ -85,6 +90,13 @@ export default function Header() {
       .replace(/ö/g, "o")
       .replace(/ç/g, "c")
       .replace(/\s+/g, "-");
+
+  const cartItemCount = cartItems.reduce(
+    (total, item) => total + item.count,
+    0,
+  );
+
+  const formatPrice = (price) => `$${price.toFixed(2)}`;
 
   if (isPending) {
     return <Loading />;
@@ -135,7 +147,11 @@ export default function Header() {
 
           <button
             className="mobile-menu-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => {
+              setIsMenuOpen((prev) => !prev);
+              setIsShopMenuOpen(false);
+              setIsCartMenuOpen(false);
+            }}
             aria-label="Toggle navigation menu"
             aria-expanded={isMenuOpen}
           >
@@ -151,7 +167,10 @@ export default function Header() {
                       type="button"
                       className="nav-link nav-link-trigger"
                       aria-expanded={isShopMenuOpen}
-                      onClick={() => setIsShopMenuOpen((prev) => !prev)}
+                      onClick={() => {
+                        setIsShopMenuOpen((prev) => !prev);
+                        setIsCartMenuOpen(false);
+                      }}
                     >
                       {link.label}
                       <ChevronDown size={16} />
@@ -237,9 +256,88 @@ export default function Header() {
                   <button className="icon-button">
                     <Search size={20} />
                   </button>
-                  <button className="icon-button">
-                    <ShoppingCart size={20} /> 1
-                  </button>
+                  <div className="cart-dropdown-wrapper">
+                    <button
+                      type="button"
+                      className="icon-button cart-button"
+                      onClick={() => {
+                        setIsCartMenuOpen((prev) => !prev);
+                        setIsShopMenuOpen(false);
+                      }}
+                    >
+                      <ShoppingCart size={20} />
+                      <span>{cartItemCount}</span>
+                    </button>
+                    {isCartMenuOpen && (
+                      <button
+                        type="button"
+                        className="cart-dropdown-backdrop"
+                        onClick={() => setIsCartMenuOpen(false)}
+                      />
+                    )}
+                    {isCartMenuOpen && (
+                      <div
+                        id="shopping-cart-dropdown"
+                        className="cart-dropdown-panel"
+                      >
+                        <div className="cart-dropdown-header">
+                          <h2>Sepetim ({cartItemCount} Ürün)</h2>
+                        </div>
+
+                        <div className="cart-dropdown-list">
+                          {cartItems.length ? (
+                            cartItems.map((item) => (
+                              <article
+                                key={item.product.id}
+                                className="cart-dropdown-item"
+                              >
+                                <img
+                                  src={
+                                    item.product.images?.[0]?.url ??
+                                    "/product/product-1.jpg"
+                                  }
+                                  alt={item.product.name ?? "Product"}
+                                  className="cart-dropdown-image"
+                                />
+                                <div className="cart-dropdown-info">
+                                  <h3 className="cart-dropdown-name">
+                                    {item.product.name ?? "Ürün"}
+                                  </h3>
+                                  <p className="cart-dropdown-subtitle">
+                                    Adet: {item.count}
+                                  </p>
+                                  <p className="cart-dropdown-price">
+                                    {formatPrice(item.product.price)}
+                                  </p>
+                                </div>
+                              </article>
+                            ))
+                          ) : (
+                            <p className="cart-dropdown-empty">
+                              Sepetiniz şu anda boş.
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="cart-dropdown-actions">
+                          <Link
+                            to="/shopping-cart"
+                            className="cart-dropdown-action cart-dropdown-action-secondary"
+                            onClick={() => setIsCartMenuOpen(false)}
+                          >
+                            Sepete Git
+                          </Link>
+                          <button
+                            type="button"
+                            className="cart-dropdown-action cart-dropdown-action-primary"
+                            onClick={() => setIsCartMenuOpen(false)}
+                          >
+                            Siparişi Tamamla
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   <button className="icon-button">
                     <Heart size={20} /> 1
                   </button>
