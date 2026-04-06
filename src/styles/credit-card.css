@@ -1,0 +1,127 @@
+@import "../tailwind-ref.css";
+
+.order-payment {
+  @apply flex flex-col gap-4;
+}
+
+.order-card-shell {
+  @apply border border-slate-300 rounded-[0.8rem] grid grid-cols-[minmax(0,1fr)_0.95fr] overflow-hidden;
+}
+
+.order-card-left,
+.order-card-right {
+  @apply p-4;
+}
+
+.order-card-right {
+  @apply border-l border-slate-200;
+}
+
+.order-card-left-header {
+  @apply flex justify-between items-center gap-3 mb-3;
+}
+
+.order-card-left-header h3,
+.order-card-right h3 {
+  @apply m-0 text-slate-900;
+}
+
+.order-card-right p {
+  @apply mt-[0.3rem] mr-0 mb-[0.8rem] ml-0 text-slate-600 text-[0.92rem];
+}
+
+.order-card-list {
+  @apply grid gap-3;
+}
+
+.order-saved-card {
+  @apply border border-slate-300 rounded-xl p-[0.8rem] bg-white text-left cursor-pointer;
+}
+
+.order-saved-card-selected {
+  @apply border-slate-800 shadow-[0_0_0_2px_rgba(30,41,59,0.16)];
+}
+
+.order-saved-card-title-row {
+  @apply flex justify-between items-center font-bold text-slate-800;
+}
+
+.order-saved-card p {
+  @apply mt-[0.3rem] mr-0 mb-0 ml-0 text-slate-700 text-[0.9rem];
+}
+
+.order-installment-table {
+  @apply grid grid-cols-2 border border-slate-300 rounded-[0.7rem] overflow-hidden;
+}
+
+.order-installment-head,
+.order-installment-cell {
+  @apply p-[0.8rem] border-b border-slate-200;
+}
+
+.order-installment-head {
+  @apply font-bold text-slate-900 bg-slate-50;
+}
+
+.order-installment-cell {
+  @apply text-slate-800 font-semibold;
+}
+
+.order-installment-table > :nth-last-child(-n + 2) {
+  @apply border-b-0;
+}
+
+.order-payment-selected-addresses {
+  @apply grid grid-cols-2 gap-[0.8rem];
+}
+
+.order-payment-selected-box {
+  @apply border border-slate-300 rounded-[0.7rem] p-[0.8rem] bg-slate-50;
+}
+
+.order-payment-selected-box h4 {
+  @apply mt-0 mr-0 mb-[0.4rem] ml-0 text-slate-900;
+}
+
+.order-payment-selected-box p {
+  @apply my-[0.2rem] mx-0 text-slate-700 text-[0.9rem];
+}
+
+.order-card-form {
+  @apply flex flex-col gap-[0.65rem];
+}
+
+.order-card-form label {
+  @apply text-[0.9rem] text-slate-700 font-semibold;
+}
+
+.order-card-form input {
+  @apply border border-slate-300 rounded-[0.6rem] h-[2.8rem] py-0 px-[0.8rem] outline-none;
+}
+
+.order-card-form input:focus {
+  @apply border-slate-800 shadow-[0_0_0_2px_rgba(30,41,59,0.14)];
+}
+
+.order-card-row {
+  @apply grid grid-cols-2 gap-[0.65rem];
+}
+
+.order-card-row > div {
+  @apply flex flex-col gap-[0.65rem];
+}
+
+@media (max-width: 768px) {
+  .order-payment-selected-addresses,
+  .order-card-row {
+    @apply grid-cols-1;
+  }
+
+  .order-card-shell {
+    @apply grid-cols-1;
+  }
+
+  .order-card-right {
+    @apply border-l-0 border-t border-slate-200;
+  }
+}

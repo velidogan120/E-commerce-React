@@ -11,6 +11,7 @@ import ContactPage from "../../pages/ContactPage";
 import SignUpPage from "../../pages/SignUpPage";
 import LoginPage from "../../pages/LoginPage";
 import ShoppingCartPage from "../../pages/ShoppingCartPage";
+import Order from "../../components/Order";
 const Router = () => {
   return (
     <Routes>
@@ -30,6 +31,7 @@ const Router = () => {
         <Route path="signup" element={<SignUpPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="shopping-cart" element={<ShoppingCartPage />} />
+        <Route path="order" element={<Order />} />
       </Route>
     </Routes>
   );

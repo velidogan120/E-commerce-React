@@ -1,0 +1,51 @@
+@import "../tailwind-ref.css";
+
+.order-address {
+  @apply flex flex-col gap-[1.4rem];
+}
+
+.order-address-feedback-error {
+  @apply border-red-800 text-red-800 bg-red-50;
+}
+
+.order-address-section {
+  @apply flex flex-col gap-[0.8rem];
+}
+
+.order-add-action-row {
+  @apply flex justify-end;
+}
+
+.order-address-section-header h3 {
+  @apply m-0 text-slate-900;
+}
+
+.order-address-section-header p {
+  @apply mt-[0.3rem] mr-0 mb-0 ml-0 text-slate-500 text-[0.92rem];
+}
+
+.order-address-grid {
+  @apply grid grid-cols-2 gap-[0.85rem];
+}
+
+.order-address-card {
+  @apply border border-slate-300 rounded-xl p-[0.9rem] text-left bg-white flex flex-col gap-[0.38rem] cursor-pointer text-slate-800;
+}
+
+.order-address-card-head {
+  @apply flex justify-between items-center font-bold;
+}
+
+.order-address-name {
+  @apply font-semibold;
+}
+
+.order-address-card-selected {
+  @apply border-slate-800 shadow-[0_0_0_2px_rgba(30,41,59,0.15)];
+}
+
+@media (max-width: 768px) {
+  .order-address-grid {
+    @apply grid-cols-1;
+  }
+}
