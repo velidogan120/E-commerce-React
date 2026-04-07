@@ -10,6 +10,35 @@ import {
 } from "../lib/services/clientService";
 import { logout, setUser } from "../lib/store/slices/clientSlice";
 
+const AUTH_ROUTES = new Set(["/signup"]);
+
+const getSafeRedirectPath = (searchParams) => {
+  const redirect = searchParams.get("redirect");
+
+  if (!redirect) {
+    return "/";
+  }
+
+  let decodedRedirect = redirect;
+  try {
+    decodedRedirect = decodeURIComponent(redirect);
+  } catch {
+    return "/";
+  }
+
+  if (!decodedRedirect.startsWith("/")) {
+    return "/";
+  }
+
+  const [pathOnly] = decodedRedirect.split("?");
+
+  if (AUTH_ROUTES.has(pathOnly)) {
+    return "/";
+  }
+
+  return decodedRedirect;
+};
+
 export const useSignUp = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -17,13 +46,7 @@ export const useSignUp = () => {
   return useMutation({
     mutationFn: signup,
     onSuccess: () => {
-      const redirect = searchParams.get("redirect");
-
-      if (redirect) {
-        navigate(decodeURIComponent(redirect));
-      } else {
-        navigate("/");
-      }
+      navigate(getSafeRedirectPath(searchParams));
 
       toast.success(
         "Hesabınızı etkinleştirmek için e-postadaki bağlantıya tıklamanız gerekiyor!",
@@ -49,7 +72,6 @@ export const useLogin = () => {
       return login(loginData);
     },
     onSuccess: (data, variables) => {
-      const redirect = searchParams.get("redirect");
       toast.success("Giriş başarılı!");
       dispatch(
         setUser({
@@ -57,11 +79,8 @@ export const useLogin = () => {
           rememberMe: Boolean(variables?.rememberMe),
         }),
       );
-      if (redirect) {
-        navigate(decodeURIComponent(redirect));
-      } else {
-        navigate("/");
-      }
+
+      navigate(getSafeRedirectPath(searchParams));
     },
     onError: () => {
       toast.error("Giriş başarısız! Lütfen bilgilerinizi kontrol edin.", {

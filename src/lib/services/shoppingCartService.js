@@ -39,3 +39,12 @@ export const deleteCreditCards = async (cardId) => {
   const res = await eCommerceApi.delete(`/user/card/${cardId}`);
   return res.data;
 };
+
+export const getOrders = async () => {
+  const res = await eCommerceApi.get("/order");
+  return res.data;
+};
+export const completeOrder = async (orderPayload) => {
+  const res = await eCommerceApi.post("/order", orderPayload);
+  return res.data;
+};

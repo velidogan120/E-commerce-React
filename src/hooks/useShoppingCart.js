@@ -2,10 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   addAddresses,
   addCreditCards,
+  completeOrder,
   deleteAddresses,
   deleteCreditCards,
   getAddresses,
   getCards,
+  getOrders,
   updateAddresses,
   updateCreditCards,
 } from "../lib/services/shoppingCartService";
@@ -91,6 +93,25 @@ export const useDeleteCreditCards = () => {
     mutationFn: deleteCreditCards,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: cardQueryKey });
+    },
+  });
+};
+
+export const useOrders = () => {
+  return useQuery({
+    queryKey: ["order"],
+    queryFn: getOrders,
+    refetchOnWindowFocus: false,
+  });
+};
+export const useCompleteOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: completeOrder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: cardQueryKey });
+      queryClient.invalidateQueries({ queryKey: addressQueryKey });
     },
   });
 };

@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import "../styles/shopping-cart-total-summary.css";
 
 const formatPrice = (price) => `$${price.toFixed(2) ?? "0.00"}`;
 
 const ShoppingCartTotalSummary = () => {
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.shoppingCart.cart);
 
   const selectedItems = cartItems.filter((item) => item.checked);
@@ -65,6 +67,7 @@ const ShoppingCartTotalSummary = () => {
       <button
         className="shopping-cart-total-checkout-btn"
         disabled={selectedItemCount === 0}
+        onClick={() => navigate("/order")}
       >
         Siparisi Tamamla
       </button>

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { PacmanLoader } from "react-spinners";
 import { useRoles, useSignUp } from "../hooks/useAuth";
 import { setRoles } from "../lib/store/slices/clientSlice";
 import "../styles/sign-up.css";
 import Loading from "./shared/Loading";
-import { useDispatch } from "react-redux";
 const SignUp = () => {
   const { mutate, isPending } = useSignUp();
   const { data: roles = [] } = useRoles();
@@ -15,25 +15,22 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
     trigger,
     control,
   } = useForm({
     defaultValues: {
-      role_id: "2",
+      role_id: "3",
     },
+    mode: "all",
   });
   const passwordValidation = useWatch({ control, name: "password" });
   const roleValidation = useWatch({ control, name: "role_id" });
 
   useEffect(() => {
-    if (passwordValidation) {
-      trigger("passwordValidation");
-    }
     if (roles.length === 0) {
       dispatch(setRoles(roles));
     }
-  }, [passwordValidation, trigger, roles, dispatch]);
+  }, [trigger, roles, dispatch]);
 
   const onSubmit = (data) => {
     const payload = {
@@ -129,7 +126,7 @@ const SignUp = () => {
             {...register("passwordValidation", {
               required: { value: true, message: "Şifre zorunludur" },
               validate: (value) =>
-                value === getValues("password") || "Şifreler aynı olmalıdır",
+                value === passwordValidation || "Şifreler aynı olmalıdır",
             })}
           />
           {errors.passwordValidation && (

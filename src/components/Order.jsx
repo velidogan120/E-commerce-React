@@ -1,21 +1,64 @@
 import { useEffect, useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useAddresses, useCreditCards } from "../hooks/useShoppingCart";
-import { setAddress, setPayment } from "../lib/store/slices/shoppingCartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import {
+  useAddresses,
+  useCompleteOrder,
+  useCreditCards,
+} from "../hooks/useShoppingCart";
+import {
+  clearCheckedCartItems,
+  setAddress,
+  setPayment,
+} from "../lib/store/slices/shoppingCartSlice";
 import "../styles/order.css";
 import Address from "./Address";
 import CreditCard from "./CreditCard";
+import FormModal from "./shared/FormModal";
 
 const Order = () => {
   const { data: addresses = [] } = useAddresses();
   const { data: payment = [] } = useCreditCards();
+  const { mutate: completeOrderMutate } = useCompleteOrder();
+  const { cart } = useSelector((state) => state.shoppingCart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("address");
   const [selectedDeliveryId, setSelectedDeliveryId] = useState(null);
   const [selectedBillingId, setSelectedBillingId] = useState(null);
+  const [selectedCreditCardId, setSelectedCreditCardId] = useState(null);
+  const [isApproveModalOpen, setIsApproveModalOpen] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      approvalCode: "",
+    },
+  });
+
+  const selectedProducts = cart.filter((item) => item.checked);
+  const totalPrice = useMemo(
+    () =>
+      selectedProducts.reduce(
+        (sum, item) => sum + (item.product.price ?? 0) * item.count,
+        0,
+      ),
+    [selectedProducts],
+  );
+  const hasAddressSelection =
+    selectedDeliveryId !== null && selectedBillingId !== null;
+  const effectiveSelectedCreditCardId =
+    selectedCreditCardId ?? payment[0]?.id ?? null;
+  const hasCreditCardSelection = effectiveSelectedCreditCardId !== null;
 
   const canOpenPaymentTab = Boolean(
-    selectedDeliveryId && selectedBillingId && addresses.length > 0,
+    hasAddressSelection && addresses.length > 0,
   );
 
   const selectedDeliveryAddress = useMemo(
@@ -29,18 +72,67 @@ const Order = () => {
   );
 
   const handleTabChange = (tabKey) => {
-    if (!canOpenPaymentTab) {
+    if (tabKey === "payment" && !canOpenPaymentTab) {
+      toast.warning("Önce teslimat ve fatura adresi secmelisiniz.");
       return;
     }
 
     setActiveTab(tabKey);
   };
 
-  const handleContinue = () => {
-    if (activeTab === "address" && canOpenPaymentTab) {
+  const handleComplete = () => {
+    if (activeTab === "address") {
+      if (!hasAddressSelection) {
+        toast.warning("Teslimat ve fatura adresini secin.");
+        return;
+      }
+
       setActiveTab("payment");
       return;
     }
+
+    if (activeTab === "payment") {
+      if (!hasCreditCardSelection) {
+        toast.warning("Lutfen bir kredi karti secin.");
+        return;
+      }
+
+      reset({ approvalCode: "" });
+      setIsApproveModalOpen(true);
+    }
+  };
+
+  const closeApproveModal = () => {
+    setIsApproveModalOpen(false);
+    reset({ approvalCode: "" });
+  };
+
+  const handleApprovalSubmit = ({ approvalCode }) => {
+    if (approvalCode.trim() !== "1234") {
+      toast.warning("Sifre yanlis.");
+      return;
+    }
+    completeOrderMutate({
+      address_id: selectedBillingId,
+      order_date: new Date().toISOString(),
+      ...payment.find((card) => card.id === effectiveSelectedCreditCardId),
+      card_ccv: 321,
+      price: selectedProducts.reduce(
+        (sum, item) => sum + (item.product.price ?? 0) * item.count,
+        0,
+      ),
+      products: [
+        ...selectedProducts.map((item) => ({
+          product_id: item.product.id,
+          count: item.product.count,
+          description: item.product.description,
+        })),
+      ],
+    });
+    dispatch(clearCheckedCartItems());
+    closeApproveModal();
+    toast.success("Siparisiniz onaylandi.");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -96,23 +188,56 @@ const Order = () => {
             <CreditCard
               deliveryAddress={selectedDeliveryAddress}
               billingAddress={selectedBillingAddress}
+              selectedCreditCardId={effectiveSelectedCreditCardId}
+              setSelectedCreditCardId={setSelectedCreditCardId}
+              totalPrice={(totalPrice + 29.99).toFixed(2)}
             />
           )}
         </div>
       </div>
 
+      <FormModal
+        isOpen={isApproveModalOpen}
+        title="Siparis Onayi"
+        onClose={closeApproveModal}
+      >
+        <form
+          className="order-modal-form form-group"
+          onSubmit={handleSubmit(handleApprovalSubmit)}
+        >
+          <label htmlFor="approvalCode">Onay sifresi</label>
+          <input
+            id="approvalCode"
+            placeholder="Sifreyi girin"
+            {...register("approvalCode", {
+              required: "Sifre zorunludur.",
+            })}
+          />
+
+          {errors.approvalCode ? (
+            <p className="form-error">{errors.approvalCode.message}</p>
+          ) : null}
+
+          <button type="submit" className="order-modal-submit">
+            Onayla
+          </button>
+        </form>
+      </FormModal>
+
       <aside className="order-sidebar">
         <div className="order-summary-card">
           <h3>Siparis Ozeti</h3>
-          <p>Urun Toplami: 8.448,99 TL</p>
+          <p>Urun Toplami: {totalPrice.toFixed(2)} TL</p>
           <p>Kargo: 29,99 TL</p>
-          <p className="order-summary-total">Toplam: 8.448,99 TL</p>
+          <p className="order-summary-total">
+            Toplam: {(totalPrice + 29.99).toFixed(2)} TL
+          </p>
         </div>
 
         <button
           type="button"
           className="order-continue-button"
-          onClick={handleContinue}
+          onClick={handleComplete}
         >
           Kaydet ve Devam Et
         </button>

@@ -70,6 +70,9 @@ const shoppingCartSlice = createSlice({
         (item) => item.product.id !== action.payload,
       );
     },
+    clearCheckedCartItems: (state) => {
+      state.cart = state.cart.filter((item) => !item.checked);
+    },
   },
 });
 
@@ -82,6 +85,7 @@ export const {
   incrementCartItemCount,
   decrementCartItemCount,
   removeCartItem,
+  clearCheckedCartItems,
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

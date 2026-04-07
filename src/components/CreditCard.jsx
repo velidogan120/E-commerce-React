@@ -10,14 +10,20 @@ import "../styles/credit-card.css";
 import FormModal from "./shared/FormModal";
 import { SquarePen, Trash } from "lucide-react";
 
-const CreditCard = ({ deliveryAddress, billingAddress }) => {
+const CreditCard = ({
+  deliveryAddress,
+  billingAddress,
+  selectedCreditCardId,
+  setSelectedCreditCardId,
+  totalPrice,
+}) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [editingCreditCardId, setEditingCreditCardId] = useState(null);
   const { data: cards = [], isPending, isError } = useCreditCards();
   const { mutate: addedCardMutate } = useAddCreditCards();
   const { mutate: deletedCreditCardsMutate } = useDeleteCreditCards();
   const { mutate: updatedCreditCardsMutate } = useUpdateCreditCards();
-  const [selectedCreditCardId, setSelectedCreditCardId] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -206,7 +212,7 @@ const CreditCard = ({ deliveryAddress, billingAddress }) => {
             <div className="order-installment-head">Taksit Sayisi</div>
             <div className="order-installment-head">Aylik Odeme</div>
             <div className="order-installment-cell">Tek Cekim</div>
-            <div className="order-installment-cell">6.604,22 TL</div>
+            <div className="order-installment-cell">{totalPrice} TL</div>
           </div>
         </div>
       </div>

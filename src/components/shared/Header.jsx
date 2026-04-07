@@ -18,17 +18,17 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useSearchParams } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import "../../../src/styles/header.css";
-import { useTheme } from "../../hooks/useTheme";
-import { logout } from "../../lib/store/slices/clientSlice";
-import Gravatar from "./Gravatar";
 import { useVerifyToken } from "../../hooks/useAuth";
 import { useCategories } from "../../hooks/useProducts";
+import { useTheme } from "../../hooks/useTheme";
+import { logout } from "../../lib/store/slices/clientSlice";
 import {
   setCategories,
   setCategoryId,
 } from "../../lib/store/slices/productSlice";
+import Gravatar from "./Gravatar";
 import Loading from "./Loading";
 
 export default function Header() {
@@ -41,7 +41,7 @@ export default function Header() {
   const { data: categories = [], isPending } = useCategories();
   const dispatch = useDispatch();
   const location = useLocation();
-  const [, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const { mutate: verifyToken } = useVerifyToken();
   useEffect(() => {
     const handleResize = () => {
@@ -66,9 +66,14 @@ export default function Header() {
     { label: "Contact", href: "/contact" },
   ];
 
-  const handleRoute = () => {
-    const redirectPath = location.pathname + location.search;
-    setSearchParams({ redirect: encodeURIComponent(redirectPath) });
+  const handleRoute = (path) => {
+    const params = new URLSearchParams(location.search);
+    params.delete("redirect");
+
+    const search = params.toString();
+    const redirectPath = location.pathname + (search ? `?${search}` : "");
+
+    navigate(`${path}?redirect=${encodeURIComponent(redirectPath)}`);
     setIsMenuOpen(false);
     setIsShopMenuOpen(false);
     setIsCartMenuOpen(false);
@@ -152,7 +157,6 @@ export default function Header() {
               setIsShopMenuOpen(false);
               setIsCartMenuOpen(false);
             }}
-            aria-label="Toggle navigation menu"
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -345,21 +349,19 @@ export default function Header() {
               ) : (
                 <span className="login-register-btn">
                   <User size={20} />
-                  <Link
+                  <button
                     className="icon-button"
-                    to="/login"
-                    onClick={handleRoute}
+                    onClick={() => handleRoute("/login")}
                   >
                     Login
-                  </Link>
+                  </button>
                   <span>/</span>
-                  <Link
+                  <button
                     className="icon-button"
-                    to="/signup"
-                    onClick={handleRoute}
+                    onClick={() => handleRoute("/signup")}
                   >
                     Register
-                  </Link>
+                  </button>
                 </span>
               )}
               {
