@@ -107,7 +107,10 @@ export const useVerifyToken = () => {
   return useMutation({
     mutationFn: () => verifyTokenApi(),
     onSuccess: (data) => {
-      dispatch(setUser(data));
+      dispatch(setUser({ ...data, rememberMe: true }));
+    },
+    onError: () => {
+      dispatch(logout());
     },
   });
 };

@@ -12,6 +12,13 @@
   @apply container mx-auto flex flex-col lg:flex-row gap-10 items-center justify-between p-10;
 }
 
+.breadcrumb-back {
+  @apply me-10 border border-slate-800 rounded-md px-5 py-2 hover:bg-slate-800 hover:text-white flex items-center gap-2;
+  @variant dark {
+    @apply text-slate-800;
+  }
+}
+
 .breadcrumb.other .breadcrumb-container {
   @apply flex-col gap-5;
 }

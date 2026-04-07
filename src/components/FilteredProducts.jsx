@@ -5,13 +5,17 @@ const FilteredProducts = () => {
   const products = useSelector((state) => state.product.products);
 
   const displayedProducts =
-    products?.length > 0 ? products : Array.from({ length: 4 }, () => null);
+    products?.length > 0 ? products : "Bu kategoride ürün bulunmamaktadır.";
 
   return (
     <div className="filtered-products">
-      {displayedProducts.map((product, index) => (
-        <FeaturedProduct key={product?.id ?? index} product={product} />
-      ))}
+      {Array.isArray(displayedProducts) ? (
+        displayedProducts.map((product, index) => (
+          <FeaturedProduct key={product?.id ?? index} product={product} />
+        ))
+      ) : (
+        <p className="filtered-products__empty">{displayedProducts}</p>
+      )}
     </div>
   );
 };

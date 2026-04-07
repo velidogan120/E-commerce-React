@@ -7,3 +7,12 @@
 .filtered-products .featured-product {
   @apply lg:w-1/4;
 }
+
+.filtered-products__empty {
+  @apply w-full mb-10 flex min-h-64 items-center justify-center rounded-2xl border border-dashed border-slate-300 px-6 py-16 text-center text-base font-medium text-slate-500 shadow-sm;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(241, 245, 249, 0.9)
+  );
+}

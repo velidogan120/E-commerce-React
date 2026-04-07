@@ -1,5 +1,5 @@
-import { ChevronRight } from "lucide-react";
-import { NavLink, useLocation } from "react-router";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import "../../styles/breadcrumb.css";
 
 const breadcrumbData = {
@@ -24,6 +24,7 @@ const breadcrumbData = {
 
 const Breadcrumb = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname.split("/")[1];
   return (
     <div className={`breadcrumb ${currentPath !== "shop" ? "other" : ""}`}>
@@ -37,6 +38,10 @@ const Breadcrumb = () => {
           <h2>{breadcrumbData[currentPath]?.title || "Shop"}</h2>
         )}
         <div className="breadcrumb-info">
+          <button className="breadcrumb-back" onClick={() => navigate(-1)}>
+            <ChevronLeft />
+            Geri Git
+          </button>
           <NavLink to="/" className="breadcrumb-link">
             Home
           </NavLink>

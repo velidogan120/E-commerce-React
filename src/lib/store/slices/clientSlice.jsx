@@ -22,7 +22,7 @@ const clientSlice = createSlice({
         rememberMe = false,
       } = action.payload;
 
-      state.user = { email, name, role_id, token };
+      state.user = { email, name, role_id, rememberMe };
 
       if (rememberMe || token !== localStorage.getItem("token")) {
         localStorage.setItem("token", token);

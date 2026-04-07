@@ -2,6 +2,7 @@ import { Circle } from "lucide-react";
 import "../styles/featured-product.css";
 import { Link, useLocation } from "react-router";
 const FeaturedProduct = ({ product }) => {
+  console.log("🚀 ~ FeaturedProduct ~ product:", product);
   const location = useLocation();
   const imageSrc =
     product?.images[0].url ??
@@ -26,7 +27,8 @@ const FeaturedProduct = ({ product }) => {
           </div>
         </div>
       </Link>
-      {location.pathname === "/shop" && (
+      {(location.pathname.includes("/products") ||
+        !location.pathname.includes("/shop") === false) && (
         <div className="card-colors">
           <Circle fill="currentColor" className="text-sky-500" />
           <Circle fill="currentColor" className="text-teal-700" />

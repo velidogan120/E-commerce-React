@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -7,17 +6,20 @@ import {
   ShoppingCart,
   Star,
 } from "lucide-react";
-import "../styles/product.css";
-import { useProductById } from "../hooks/useProducts";
-import { useParams } from "react-router";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
+import { useProductById } from "../hooks/useProducts";
 import { setProduct } from "../lib/store/slices/productSlice";
 import { setCart } from "../lib/store/slices/shoppingCartSlice";
-import { toast } from "react-toastify";
+import "../styles/product.css";
+import Loading from "./shared/Loading";
 
 const Product = () => {
   const { productId } = useParams();
-  const { data } = useProductById(productId);
+  const { data, isError, isPending } = useProductById(productId);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const activeProduct = useMemo(() => data ?? {}, [data]);
@@ -52,6 +54,13 @@ const Product = () => {
     dispatch(setProduct(activeProduct));
   }, [activeProduct, dispatch]);
 
+  if (isError) {
+    navigate(-1);
+  }
+
+  if (isPending) {
+    return <Loading />;
+  }
   return (
     <section className="product-detail-section">
       <div className="product-detail-container">

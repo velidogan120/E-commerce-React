@@ -79,12 +79,12 @@ export default function Header() {
     setIsCartMenuOpen(false);
   };
 
-  const womenCategories = categories.filter(
-    (category) => category.gender === "k",
-  );
-  const menCategories = categories.filter(
-    (category) => category.gender === "e",
-  );
+  const womenCategories = categories
+    .filter((category) => category.gender === "k")
+    .slice(0, 5);
+  const menCategories = categories
+    .filter((category) => category.gender === "e")
+    .slice(0, 5);
   const slugify = (text) =>
     text
       .toLowerCase()
@@ -189,7 +189,15 @@ export default function Header() {
                     <div
                       className={`nav-link-dropdown-content ${isShopMenuOpen ? "is-open-mobile" : ""}`}
                     >
-                      <Link to="/shop" className="nav-link-dropdown-all">
+                      <Link
+                        to="/shop/all/tum-kategoriler/0"
+                        className="nav-link-dropdown-all"
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setIsShopMenuOpen(false);
+                          dispatch(setCategoryId(null));
+                        }}
+                      >
                         Tüm Kategoriler
                       </Link>
                       <div className="nav-link-dropdown-columns">

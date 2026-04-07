@@ -33,6 +33,7 @@ const Sort = () => {
           defaultValue={sort}
           onChange={(e) => dispatch(setSort(e.target.value))}
         >
+          <option value="">Sort by latest</option>
           <option value="price:asc">Low to high</option>
           <option value="price:desc">High to low</option>
           <option value="rating:asc">Rating: lowest first</option>
