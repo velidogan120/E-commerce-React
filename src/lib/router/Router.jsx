@@ -1,17 +1,18 @@
 import { Route, Routes } from "react-router";
-import HomePage from "../../pages/HomePage";
 import MainLayout from "../../layout/MainLayout";
 import ShopLayout from "../../layout/ShopLayout";
-import ShopPage from "../../pages/ShopPage";
-import ProductPage from "../../pages/ProductPage";
 import AboutPage from "../../pages/AboutPage";
-import PricePage from "../../pages/PricePage";
-import TeamPage from "../../pages/TeamPage";
 import ContactPage from "../../pages/ContactPage";
-import SignUpPage from "../../pages/SignUpPage";
+import HomePage from "../../pages/HomePage";
 import LoginPage from "../../pages/LoginPage";
+import OrderPage from "../../pages/OrderPage";
+import PreviousOrdersPage from "../../pages/PreviousOrdersPage";
+import PricePage from "../../pages/PricePage";
+import ProductPage from "../../pages/ProductPage";
+import ShopPage from "../../pages/ShopPage";
 import ShoppingCartPage from "../../pages/ShoppingCartPage";
-import Order from "../../components/Order";
+import SignUpPage from "../../pages/SignUpPage";
+import TeamPage from "../../pages/TeamPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 const Router = () => {
   return (
@@ -34,7 +35,8 @@ const Router = () => {
         <Route path="shopping-cart" element={<ShoppingCartPage />} />
 
         <Route element={<ProtectedRoutes />}>
-          <Route path="order" element={<Order />} />
+          <Route path="order" element={<OrderPage />} />
+          <Route path="previous-order" element={<PreviousOrdersPage />} />
         </Route>
       </Route>
     </Routes>

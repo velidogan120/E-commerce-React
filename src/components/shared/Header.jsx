@@ -35,6 +35,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { handleToggleTheme, theme } = useTheme();
   const { user } = useSelector((state) => state.client);
   const cartItems = useSelector((state) => state.shoppingCart.cart);
@@ -48,6 +49,8 @@ export default function Header() {
       if (window.innerWidth >= 1024) {
         setIsMenuOpen(false);
         setIsShopMenuOpen(false);
+        setIsCartMenuOpen(false);
+        setIsUserMenuOpen(false);
       }
     };
     verifyToken();
@@ -156,6 +159,7 @@ export default function Header() {
               setIsMenuOpen((prev) => !prev);
               setIsShopMenuOpen(false);
               setIsCartMenuOpen(false);
+              setIsUserMenuOpen(false);
             }}
             aria-expanded={isMenuOpen}
           >
@@ -258,16 +262,75 @@ export default function Header() {
               {user ? (
                 <>
                   <Gravatar email={user.email} />
-                  <p>{user.name}</p>
+                  <div className="user-dropdown-wrapper">
+                    <button
+                      type="button"
+                      className="icon-button user-dropdown-trigger"
+                      onClick={() => {
+                        setIsUserMenuOpen((prev) => !prev);
+                        setIsCartMenuOpen(false);
+                        setIsShopMenuOpen(false);
+                      }}
+                      aria-expanded={isUserMenuOpen}
+                    >
+                      <span>{user.name}</span>
+                      <ChevronDown size={16} />
+                    </button>
+
+                    {isUserMenuOpen && (
+                      <button
+                        type="button"
+                        className="user-dropdown-backdrop"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      />
+                    )}
+
+                    {isUserMenuOpen && (
+                      <div className="user-dropdown-panel">
+                        <Link
+                          to="/previous-order"
+                          className="user-dropdown-item"
+                          onClick={() => {
+                            setIsUserMenuOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          Previous Orders
+                        </Link>
+                      </div>
+                    )}
+                  </div>
                   <button
                     className="icon-button"
                     onClick={() => {
                       dispatch(logout());
                       navigate("/");
+                      setIsUserMenuOpen(false);
                     }}
                   >
                     <LogOut />
                   </button>
+                </>
+              ) : (
+                <span className="login-register-btn">
+                  <User size={20} />
+                  <button
+                    className="icon-button"
+                    onClick={() => handleRoute("/login")}
+                  >
+                    Login
+                  </button>
+                  <span>/</span>
+                  <button
+                    className="icon-button"
+                    onClick={() => handleRoute("/signup")}
+                  >
+                    Register
+                  </button>
+                </span>
+              )}
+              {
+                <>
                   <button className="icon-button">
                     <Search size={20} />
                   </button>
@@ -278,6 +341,7 @@ export default function Header() {
                       onClick={() => {
                         setIsCartMenuOpen((prev) => !prev);
                         setIsShopMenuOpen(false);
+                        setIsUserMenuOpen(false);
                       }}
                     >
                       <ShoppingCart size={20} />
@@ -357,29 +421,11 @@ export default function Header() {
                   <button className="icon-button">
                     <Heart size={20} /> 1
                   </button>
+
+                  <button className="icon-button" onClick={handleToggleTheme}>
+                    {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+                  </button>
                 </>
-              ) : (
-                <span className="login-register-btn">
-                  <User size={20} />
-                  <button
-                    className="icon-button"
-                    onClick={() => handleRoute("/login")}
-                  >
-                    Login
-                  </button>
-                  <span>/</span>
-                  <button
-                    className="icon-button"
-                    onClick={() => handleRoute("/signup")}
-                  >
-                    Register
-                  </button>
-                </span>
-              )}
-              {
-                <button className="icon-button" onClick={handleToggleTheme}>
-                  {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
-                </button>
               }
             </div>
           </div>

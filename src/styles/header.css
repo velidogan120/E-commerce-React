@@ -100,6 +100,32 @@
   @apply text-sky-500 transition-colors p-2 rounded-lg hover:bg-gray-100 flex items-center gap-1;
 }
 
+.user-dropdown-wrapper {
+  @apply relative flex items-center;
+}
+
+.user-dropdown-trigger {
+  @apply gap-2;
+}
+
+.user-dropdown-backdrop {
+  @apply fixed inset-0 z-40 block bg-transparent;
+}
+
+.user-dropdown-panel {
+  @apply absolute right-0 top-full z-50 mt-2 min-w-44 overflow-hidden rounded-md border border-slate-200 bg-white py-2 shadow-xl;
+  @variant dark {
+    @apply border-slate-700 bg-slate-900;
+  }
+}
+
+.user-dropdown-item {
+  @apply block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100;
+  @variant dark {
+    @apply text-slate-200 hover:bg-slate-800;
+  }
+}
+
 .cart-dropdown-wrapper {
   @apply relative flex items-center;
 }
