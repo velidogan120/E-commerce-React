@@ -8,10 +8,11 @@ const eCommerceApi = axios.create({
 });
 
 eCommerceApi.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const localToken = localStorage.getItem("token");
+  const sessionToken = sessionStorage.getItem("token");
 
-  if (token) {
-    config.headers.Authorization = `${token}`;
+  if (localToken || sessionToken) {
+    config.headers.Authorization = `${localToken ? localToken : sessionToken}`;
   }
 
   return config;

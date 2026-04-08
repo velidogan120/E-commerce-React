@@ -24,8 +24,10 @@ const clientSlice = createSlice({
 
       state.user = { email, name, role_id, rememberMe };
 
-      if (rememberMe || token !== localStorage.getItem("token")) {
+      if (rememberMe) {
         localStorage.setItem("token", token);
+      } else {
+        sessionStorage.setItem("token", token);
       }
     },
     setRoles: (state, action) => {
@@ -42,6 +44,7 @@ const clientSlice = createSlice({
       state.roles = [];
 
       localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
     },
   },
 });

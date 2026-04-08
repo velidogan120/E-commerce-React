@@ -9,13 +9,13 @@ import {
 import "../styles/credit-card.css";
 import FormModal from "./shared/FormModal";
 import { SquarePen, Trash } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const CreditCard = ({
   deliveryAddress,
   billingAddress,
   selectedCreditCardId,
   setSelectedCreditCardId,
-  totalPrice,
 }) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [editingCreditCardId, setEditingCreditCardId] = useState(null);
@@ -23,6 +23,7 @@ const CreditCard = ({
   const { mutate: addedCardMutate } = useAddCreditCards();
   const { mutate: deletedCreditCardsMutate } = useDeleteCreditCards();
   const { mutate: updatedCreditCardsMutate } = useUpdateCreditCards();
+  const { totalPrice } = useSelector((state) => state.shoppingCart);
 
   const {
     register,
@@ -33,8 +34,8 @@ const CreditCard = ({
     defaultValues: {
       cardName: "",
       cardNumber: "",
-      expireMonth: "",
-      expireYear: "",
+      expireMonth: 0,
+      expireYear: 0,
     },
   });
 
@@ -48,7 +49,12 @@ const CreditCard = ({
 
   const openCardModal = () => {
     setEditingCreditCardId(null);
-    reset();
+    reset({
+      cardName: "",
+      cardNumber: "",
+      expireMonth: 0,
+      expireYear: 0,
+    });
     setIsCardModalOpen(true);
   };
 
@@ -75,8 +81,8 @@ const CreditCard = ({
     const payload = {
       name_on_card: formData.cardName.trim(),
       card_no: cleanCardNumber,
-      expire_month: formData.expireMonth.trim(),
-      expire_year: formData.expireYear.trim(),
+      expire_month: String(formData.expireMonth).trim(),
+      expire_year: String(formData.expireYear).trim(),
     };
 
     if (editingCreditCardId) {
@@ -279,7 +285,7 @@ const CreditCard = ({
                 {...register("expireMonth", {
                   required: "Ay bilgisi zorunludur.",
                   validate: (value) => {
-                    const month = Number(value.trim());
+                    const month = Number(String(value).trim());
 
                     if (!Number.isInteger(month) || String(month).length > 2) {
                       return "Ay 1 ile 12 arasinda olmalidir.";
@@ -304,7 +310,7 @@ const CreditCard = ({
                 {...register("expireYear", {
                   required: "Yil bilgisi zorunludur.",
                   validate: (value) => {
-                    const normalizedValue = value.trim();
+                    const normalizedValue = String(value).trim();
                     const year = Number(normalizedValue);
                     const currentYear = new Date().getFullYear();
 

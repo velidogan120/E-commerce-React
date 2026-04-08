@@ -12,6 +12,7 @@ import SignUpPage from "../../pages/SignUpPage";
 import LoginPage from "../../pages/LoginPage";
 import ShoppingCartPage from "../../pages/ShoppingCartPage";
 import Order from "../../components/Order";
+import ProtectedRoutes from "./ProtectedRoutes";
 const Router = () => {
   return (
     <Routes>
@@ -31,7 +32,10 @@ const Router = () => {
         <Route path="signup" element={<SignUpPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="shopping-cart" element={<ShoppingCartPage />} />
-        <Route path="order" element={<Order />} />
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="order" element={<Order />} />
+        </Route>
       </Route>
     </Routes>
   );

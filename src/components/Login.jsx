@@ -9,7 +9,9 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: { email: "", password: "", rememberMe: false },
+  });
 
   const onSubmit = (data) => {
     mutate(data);

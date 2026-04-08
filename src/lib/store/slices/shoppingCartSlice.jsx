@@ -4,6 +4,7 @@ const initialState = {
   cart: [],
   payment: [],
   address: [],
+  totalPrice: 0,
 };
 
 const shoppingCartSlice = createSlice({
@@ -73,6 +74,9 @@ const shoppingCartSlice = createSlice({
     clearCheckedCartItems: (state) => {
       state.cart = state.cart.filter((item) => !item.checked);
     },
+    setTotalPrice: (state, action) => {
+      state.totalPrice = action.payload;
+    },
   },
 });
 
@@ -86,6 +90,7 @@ export const {
   decrementCartItemCount,
   removeCartItem,
   clearCheckedCartItems,
+  setTotalPrice,
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

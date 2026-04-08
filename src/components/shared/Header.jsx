@@ -261,7 +261,10 @@ export default function Header() {
                   <p>{user.name}</p>
                   <button
                     className="icon-button"
-                    onClick={() => dispatch(logout())}
+                    onClick={() => {
+                      dispatch(logout());
+                      navigate("/");
+                    }}
                   >
                     <LogOut />
                   </button>
@@ -339,13 +342,14 @@ export default function Header() {
                           >
                             Sepete Git
                           </Link>
-                          <button
+                          <Link
                             type="button"
+                            to="/order"
                             className="cart-dropdown-action cart-dropdown-action-primary"
                             onClick={() => setIsCartMenuOpen(false)}
                           >
                             Siparişi Tamamla
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     )}

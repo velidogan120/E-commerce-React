@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router";
 import "../styles/shopping-cart-total-summary.css";
+import { useEffect } from "react";
+import { setTotalPrice } from "../lib/store/slices/shoppingCartSlice";
 
 const formatPrice = (price) => `$${price.toFixed(2) ?? "0.00"}`;
 
 const ShoppingCartTotalSummary = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.shoppingCart.cart);
 
   const selectedItems = cartItems.filter((item) => item.checked);
@@ -15,9 +19,12 @@ const ShoppingCartTotalSummary = () => {
     0,
   );
 
-  const shippingCost = subtotal > 0 ? 0 : 0;
-  const discount = 0;
+  const shippingCost = subtotal > 0 ? 10 : 0;
+  const discount = 29.99;
   const grandTotal = subtotal + shippingCost - discount;
+  useEffect(() => {
+    dispatch(setTotalPrice(grandTotal));
+  }, [grandTotal, dispatch]);
 
   return (
     <aside className="shopping-cart-total-summary">
@@ -64,17 +71,21 @@ const ShoppingCartTotalSummary = () => {
         </div>
       </div>
 
-      <button
-        className="shopping-cart-total-checkout-btn"
-        disabled={selectedItemCount === 0}
-        onClick={() => navigate("/order")}
-      >
-        Siparisi Tamamla
-      </button>
+      {location.pathname === "/shopping-cart" && (
+        <>
+          <button
+            className="shopping-cart-total-checkout-btn"
+            disabled={selectedItemCount === 0}
+            onClick={() => navigate("/order")}
+          >
+            Siparisi Tamamla
+          </button>
 
-      <div className="shopping-cart-total-info">
-        <p>Secili urunler icin kargo ucretsizdir</p>
-      </div>
+          <div className="shopping-cart-total-info">
+            <p>Secili urunler icin kargo ucretsizdir</p>
+          </div>
+        </>
+      )}
     </aside>
   );
 };

@@ -17,10 +17,12 @@ import "../styles/order.css";
 import Address from "./Address";
 import CreditCard from "./CreditCard";
 import FormModal from "./shared/FormModal";
+import ShoppingCartTotalSummary from "./ShoppingCartTotalSummary";
+import Loading from "./shared/Loading";
 
 const Order = () => {
-  const { data: addresses = [] } = useAddresses();
-  const { data: payment = [] } = useCreditCards();
+  const { data: addressesData } = useAddresses();
+  const { data: paymentData } = useCreditCards();
   const { mutate: completeOrderMutate } = useCompleteOrder();
   const { cart } = useSelector((state) => state.shoppingCart);
   const dispatch = useDispatch();
@@ -30,6 +32,9 @@ const Order = () => {
   const [selectedBillingId, setSelectedBillingId] = useState(null);
   const [selectedCreditCardId, setSelectedCreditCardId] = useState(null);
   const [isApproveModalOpen, setIsApproveModalOpen] = useState(false);
+
+  const addresses = useMemo(() => addressesData ?? [], [addressesData]);
+  const payment = useMemo(() => paymentData ?? [], [paymentData]);
 
   const {
     register,
@@ -42,15 +47,18 @@ const Order = () => {
     },
   });
 
-  const selectedProducts = cart.filter((item) => item.checked);
-  const totalPrice = useMemo(
-    () =>
-      selectedProducts.reduce(
-        (sum, item) => sum + (item.product.price ?? 0) * item.count,
-        0,
-      ),
-    [selectedProducts],
+  const selectedProducts = useMemo(
+    () => cart.filter((item) => item.checked),
+    [cart],
   );
+
+  useEffect(() => {
+    if (selectedProducts.length === 0) {
+      toast.warning("Lutfen siparis vermek istediginiz urunleri secin.");
+      navigate("/shop/all/tum-kategoriler/0");
+    }
+  }, [selectedProducts, navigate]);
+
   const hasAddressSelection =
     selectedDeliveryId !== null && selectedBillingId !== null;
   const effectiveSelectedCreditCardId =
@@ -136,10 +144,17 @@ const Order = () => {
   };
 
   useEffect(() => {
-    dispatch(setAddress(addresses));
-    dispatch(setPayment(payment));
-  }, [addresses, dispatch, payment]);
+    if (addressesData) {
+      dispatch(setAddress(addressesData));
+    }
 
+    if (paymentData) {
+      dispatch(setPayment(paymentData));
+    }
+  }, [addressesData, dispatch, paymentData]);
+  if (selectedProducts.length === 0) {
+    return <Loading />;
+  }
   return (
     <section className="order-page">
       <div className="order-main">
@@ -190,7 +205,6 @@ const Order = () => {
               billingAddress={selectedBillingAddress}
               selectedCreditCardId={effectiveSelectedCreditCardId}
               setSelectedCreditCardId={setSelectedCreditCardId}
-              totalPrice={(totalPrice + 29.99).toFixed(2)}
             />
           )}
         </div>
@@ -225,13 +239,8 @@ const Order = () => {
       </FormModal>
 
       <aside className="order-sidebar">
-        <div className="order-summary-card">
-          <h3>Siparis Ozeti</h3>
-          <p>Urun Toplami: {totalPrice.toFixed(2)} TL</p>
-          <p>Kargo: 29,99 TL</p>
-          <p className="order-summary-total">
-            Toplam: {(totalPrice + 29.99).toFixed(2)} TL
-          </p>
+        <div>
+          <ShoppingCartTotalSummary />
         </div>
 
         <button

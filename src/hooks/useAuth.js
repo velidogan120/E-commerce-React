@@ -90,11 +90,6 @@ export const useLogin = () => {
   });
 };
 
-export const useLogout = () => {
-  const dispatch = useDispatch();
-  return () => dispatch(logout());
-};
-
 export const useRoles = () => {
   return useQuery({
     queryKey: ["roles"],
