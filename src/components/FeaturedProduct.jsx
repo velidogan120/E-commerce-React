@@ -2,7 +2,6 @@ import { Circle } from "lucide-react";
 import "../styles/featured-product.css";
 import { Link, useLocation } from "react-router";
 const FeaturedProduct = ({ product }) => {
-  console.log("🚀 ~ FeaturedProduct ~ product:", product);
   const location = useLocation();
   const imageSrc =
     product?.images[0].url ??

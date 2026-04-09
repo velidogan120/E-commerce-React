@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
 import {
@@ -99,10 +99,11 @@ export const useRoles = () => {
 
 export const useVerifyToken = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.client);
   return useMutation({
-    mutationFn: () => verifyTokenApi(),
+    mutationFn: verifyTokenApi,
     onSuccess: (data) => {
-      dispatch(setUser({ ...data, rememberMe: true }));
+      dispatch(setUser({ ...data, rememberMe: user.rememberMe }));
     },
     onError: () => {
       dispatch(logout());
