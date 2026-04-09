@@ -9,6 +9,7 @@ const initialState = {
   offset: 0,
   filter: "",
   sort: "",
+  viewMode: "grid",
   categoryId: null,
   fetchState: "",
 };
@@ -41,6 +42,9 @@ const productSlice = createSlice({
     setSort: (state, action) => {
       state.sort = action.payload;
     },
+    setViewMode: (state, action) => {
+      state.viewMode = action.payload;
+    },
     setCategoryId: (state, action) => {
       state.categoryId = action.payload;
     },
@@ -59,6 +63,7 @@ export const {
   setOffset,
   setFilter,
   setSort,
+  setViewMode,
   setCategoryId,
   setProduct,
 } = productSlice.actions;
