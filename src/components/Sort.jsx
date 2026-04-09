@@ -1,13 +1,20 @@
-import { Grid2x2, LayoutGrid, List } from "lucide-react";
-import "../styles/sort.css";
-import { useTheme } from "../hooks/useTheme";
+import { LayoutGrid, List } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { setSort } from "../lib/store/slices/productSlice";
+import { useTheme } from "../hooks/useTheme";
+import { setFilter, setSort } from "../lib/store/slices/productSlice";
+import "../styles/sort.css";
 const Sort = () => {
   const { theme } = useTheme();
   const dispatch = useDispatch();
-  const { total, sort } = useSelector((state) => state.product);
-
+  const { total, sort, filter } = useSelector((state) => state.product);
+  const { register, handleSubmit } = useForm({
+    defaultValues: { sort: sort, search: filter },
+  });
+  const onSubmit = (data) => {
+    dispatch(setSort(data.sort));
+    dispatch(setFilter(data.search));
+  };
   return (
     <div className="sort">
       <div>
@@ -25,13 +32,13 @@ const Sort = () => {
           <List />
         </button>
       </div>
-      <div>
+      <form onSubmit={handleSubmit(onSubmit)} className="form-sort">
         <select
           className="sort-select"
           type="text"
           placeholder="Sort by latest"
           defaultValue={sort}
-          onChange={(e) => dispatch(setSort(e.target.value))}
+          {...register("sort")}
         >
           <option value="">Sort by latest</option>
           <option value="price:asc">Low to high</option>
@@ -39,8 +46,14 @@ const Sort = () => {
           <option value="rating:asc">Rating: lowest first</option>
           <option value="rating:desc">Rating: highest first</option>
         </select>
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="sort-search"
+          {...register("search")}
+        />
         <button className="btn sort-filter-btn">Filter</button>
-      </div>
+      </form>
     </div>
   );
 };

@@ -58,7 +58,7 @@ select {
 }
 
 .card-colors {
-  @apply flex gap-2 items-center bg-white p-3 rounded-lg w-max;
+  @apply flex gap-2 items-center bg-white p-3 rounded-lg w-max mt-auto;
 }
 
 .form-header {

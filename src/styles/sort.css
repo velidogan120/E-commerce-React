@@ -20,7 +20,7 @@
 }
 
 .sort .sort-select {
-  @apply w-max;
+  @apply w-full lg:w-max;
   @variant dark {
     @apply text-slate-800;
   }
@@ -28,4 +28,8 @@
 
 .sort .sort-filter-btn {
   @apply py-5 px-8 bg-sky-500 font-bold;
+}
+
+.sort .form-sort {
+  @apply flex items-center gap-4 m-5 lg:flex-nowrap;
 }

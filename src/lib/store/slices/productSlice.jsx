@@ -10,7 +10,7 @@ const initialState = {
   filter: "",
   sort: "",
   categoryId: null,
-  fetchState: "NOT_FETCHED",
+  fetchState: "",
 };
 
 const productSlice = createSlice({

@@ -18,7 +18,10 @@ const FeaturedProduct = ({ product }) => {
       >
         <img src={imageSrc} alt={title} />
         <div className="product-padding">
-          <h5>{title}</h5>
+          <div className="product-title-tooltip" aria-label={title}>
+            <h5 className="product-title">{title}</h5>
+            <span className="product-title-tooltip-content">{title}</span>
+          </div>
           <p>{category}</p>
           <div className="price">
             <p className="price-old">$16.48</p>
