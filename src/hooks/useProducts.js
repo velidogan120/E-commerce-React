@@ -15,7 +15,7 @@ export const useCategories = () => {
 export const useProducts = (params = {}) => {
   return useQuery({
     queryKey: ["products", params],
-    queryFn: getProducts(params),
+    queryFn: () => getProducts(params),
     refetchOnWindowFocus: false,
   });
 };
@@ -23,7 +23,7 @@ export const useProducts = (params = {}) => {
 export const useProductById = (id) => {
   return useQuery({
     queryKey: ["product", id],
-    queryFn: getProductById(id),
+    queryFn: () => getProductById(id),
     refetchOnWindowFocus: false,
   });
 };
