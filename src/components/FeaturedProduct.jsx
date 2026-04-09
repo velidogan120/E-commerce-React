@@ -7,6 +7,13 @@ const FeaturedProduct = ({ product, viewMode = "grid" }) => {
   const isListMode = isShopPage && viewMode === "list";
   const isProductDetailPage = location.pathname.includes("/products/");
   const shouldStartAlignInfo = isProductDetailPage || isListMode;
+  const defaultShopPath = "/shop/all/tum-kategoriler/0";
+  const basePath = isProductDetailPage
+    ? location.pathname.split("/products/")[0]
+    : isShopPage
+      ? location.pathname
+      : defaultShopPath;
+  const productLink = `${basePath}/products/${product?.id}`;
   const imageSrc =
     product?.images[0].url ??
     `/featured-products/featured-product-${product?.id ? product.id + 1 : 1}.jpg`;
@@ -19,7 +26,7 @@ const FeaturedProduct = ({ product, viewMode = "grid" }) => {
       className={`featured-product ${isListMode ? "featured-product--list" : ""}`}
     >
       <Link
-        to={`${location.pathname}/products/${product?.id}`}
+        to={productLink}
         className={`${isShopPage ? "product" : ""} ${isListMode ? "product-list" : ""} ${shouldStartAlignInfo ? "product-align-start" : "product-align-center"}`}
       >
         <img src={imageSrc} alt={title} />
