@@ -1,7 +1,12 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.DEV
+  ? "/api"
+  : import.meta.env.VITE_E_COMMERCE_API ||
+    "https://workintech-fe-ecommerce.onrender.com";
+
 const eCommerceApi = axios.create({
-  baseURL: import.meta.env.VITE_E_COMMERCE_API || "http://localhost:5173/",
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },

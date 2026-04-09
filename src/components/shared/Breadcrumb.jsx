@@ -38,10 +38,12 @@ const Breadcrumb = () => {
           <h2>{breadcrumbData[currentPath]?.title || "Shop"}</h2>
         )}
         <div className="breadcrumb-info">
-          <button className="breadcrumb-back" onClick={() => navigate(-1)}>
-            <ChevronLeft />
-            Geri Git
-          </button>
+          {location.pathname.includes("/products/") && (
+            <button className="breadcrumb-back" onClick={() => navigate(-1)}>
+              <ChevronLeft />
+              Geri Git
+            </button>
+          )}
           <NavLink to="/" className="breadcrumb-link">
             Home
           </NavLink>

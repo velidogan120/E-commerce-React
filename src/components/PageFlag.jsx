@@ -1,6 +1,13 @@
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import "../styles/page-flag.css";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { useDispatch } from "react-redux";
+import {
+  setCategoryId,
+  setFilter,
+  setOffset,
+  setSort,
+} from "../lib/store/slices/productSlice";
 
 const flagData = {
   home: {
@@ -8,6 +15,7 @@ const flagData = {
     header: "NEW COLLECTION",
     text: "We know how large objects will act, but things on a small scale.",
     buttonText: "SHOP NOW",
+    to: "/shop/all/tum-kategoriler/0",
     imageSrc: "./home-page/flag-girl.png",
   },
   about: {
@@ -28,6 +36,7 @@ const flagData = {
 };
 const PageFlag = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const data = flagData[location.pathname.split("/")[1]] || flagData.home;
   return (
     <div className={`flag ${data.badge !== "SUMMER 2020" ? "other" : ""}`}>
@@ -37,7 +46,18 @@ const PageFlag = () => {
           <h1 className="flag-header">{data.header}</h1>
           <p className="flag-text">{data.text}</p>
           {data.badge !== "CONTACT US" && (
-            <button className="btn flag-button">{data.buttonText}</button>
+            <Link
+              to={data.to}
+              onClick={() => {
+                dispatch(setOffset(0));
+                dispatch(setFilter(""));
+                dispatch(setSort(""));
+                dispatch(setCategoryId(null));
+              }}
+              className="btn flag-button"
+            >
+              {data.buttonText}
+            </Link>
           )}
           {data.badge === "CONTACT US" && (
             <div className="contact-info">

@@ -56,7 +56,7 @@ const PreviousOrders = () => {
         <div className="previous-orders-shell">
           <h1>Onceki Siparislerim</h1>
           <p className="previous-orders-feedback previous-orders-feedback-error">
-            Siparisler alinamadi:{" "}
+            Siparisler alinamadi:
             {error?.message ?? "Bilinmeyen bir hata olustu."}
           </p>
         </div>
@@ -109,8 +109,8 @@ const PreviousOrders = () => {
                   <div className="previous-order-content">
                     <div className="previous-order-products">
                       {products.map((product, index) => {
-                        const productImage = product?.images?.[0]?.url;
-                        const productCount = Number(product?.count ?? 0);
+                        const productImage = product?.images[0]?.url;
+                        const productCount = product?.count;
                         const productPrice = Number(product?.price ?? 0);
                         const itemTotal = productCount * productPrice;
 
@@ -124,21 +124,21 @@ const PreviousOrders = () => {
                                 productImage ||
                                 "https://placehold.co/120x140?text=No+Image"
                               }
-                              alt={product?.name ?? "Urun"}
+                              alt={product?.name ?? "Ürün"}
                             />
                             <div>
-                              <h3>{product?.name ?? "Adsiz urun"}</h3>
+                              <h3>{product?.name ?? "Adsız urun"}</h3>
                               <p>
-                                {product?.description ?? "Aciklama bulunmuyor."}
+                                {product?.description ?? "Açıklama bulunmuyor."}
                               </p>
                               <div className="previous-order-product-meta">
                                 <span>Adet: {productCount}</span>
                                 <span>
-                                  Birim:{" "}
+                                  Birim:
                                   {currencyFormatter.format(productPrice)}
                                 </span>
                                 <strong>
-                                  Ara Toplam:{" "}
+                                  Ara Toplam:
                                   {currencyFormatter.format(itemTotal)}
                                 </strong>
                               </div>

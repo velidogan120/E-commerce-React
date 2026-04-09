@@ -123,7 +123,15 @@ const Order = () => {
     completeOrderMutate({
       address_id: selectedBillingId,
       order_date: new Date().toISOString(),
-      ...payment.find((card) => card.id === effectiveSelectedCreditCardId),
+      card_no: payment.find((card) => card.id === selectedCreditCardId)
+        ?.card_no,
+      card_name: payment.find((card) => card.id === selectedCreditCardId)
+        ?.name_on_card,
+      card_expire_month: payment.find(
+        (card) => card.id === selectedCreditCardId,
+      )?.expire_month,
+      card_expire_year: payment.find((card) => card.id === selectedCreditCardId)
+        ?.expire_year,
       card_ccv: 321,
       price: selectedProducts.reduce(
         (sum, item) => sum + (item.product.price ?? 0) * item.count,
@@ -133,7 +141,7 @@ const Order = () => {
         ...selectedProducts.map((item) => ({
           product_id: item.product.id,
           count: item.product.count,
-          description: item.product.description,
+          detail: item.product.description,
         })),
       ],
     });

@@ -1,8 +1,15 @@
-import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router";
 import "../styles/featured-products.css";
 import FeaturedProduct from "./FeaturedProduct";
+import Loading from "./shared/Loading";
 const FeaturedProducts = () => {
   const location = useLocation();
+  const { products } = useSelector((state) => state.product);
+
+  if (products.length === 0) {
+    return <Loading />;
+  }
   return (
     <div
       className={`featured-products-container ${location.pathname.startsWith("/shop/") ? "product" : ""}`}
@@ -14,16 +21,20 @@ const FeaturedProducts = () => {
           <p>Problems trying to resolve the conflict between </p>
         </div>
         <div className="featured-products-list">
-          {Array.from({ length: 2 }).map(() =>
-            Array.from({
-              length: location.pathname.startsWith("/shop/") ? 4 : 5,
-            }).map((_, index) => <FeaturedProduct key={index} index={index} />),
-          )}
+          {products.length > 0 &&
+            products
+              .slice(0, location.pathname.startsWith("/shop/") ? 8 : 10)
+              .map((product, index) => (
+                <FeaturedProduct key={index} product={product} />
+              ))}
         </div>
         {location.pathname === "/" && (
-          <button className="btn featured-products-button">
+          <Link
+            to="/shop/all/tum-kategoriler/0"
+            className="btn featured-products-button"
+          >
             LOAD MORE PRODUCTS
-          </button>
+          </Link>
         )}
       </div>
     </div>
