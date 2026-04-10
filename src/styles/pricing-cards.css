@@ -9,7 +9,7 @@
 }
 
 .pricing-cards-container .common-title {
-  @apply flex flex-col gap-7 items-center w-110 mx-auto text-center;
+  @apply flex flex-col gap-7 items-center lg:w-110 mx-auto text-center;
 }
 
 .pricing-cards-container .pricing-cards-time {

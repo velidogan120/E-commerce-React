@@ -1,7 +1,7 @@
 @reference "../tailwind-ref.css";
 
 .pagination {
-  @apply container mx-auto my-20 flex justify-center rounded-md text-sky-500 font-bold;
+  @apply container mx-auto my-20 flex flex-wrap justify-center rounded-md text-sky-500 font-bold;
 }
 
 .pagination-nav-first,
@@ -35,4 +35,21 @@
 
 .pagination-ellipsis {
   @apply p-6 font-bold border border-gray-300;
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    @apply my-12 px-3;
+  }
+
+  .pagination-nav-first,
+  .pagination-nav-last,
+  .pagination-page,
+  .pagination-ellipsis {
+    @apply px-3 py-3 text-sm;
+  }
+
+  .pagination-pages {
+    @apply flex flex-wrap justify-center;
+  }
 }

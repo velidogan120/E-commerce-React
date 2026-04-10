@@ -1,4 +1,3 @@
-import { ToggleLeft } from "lucide-react";
 import "../styles/pricing-cards.css";
 import PricingCard from "./PricingCard";
 const PricingCards = () => {
